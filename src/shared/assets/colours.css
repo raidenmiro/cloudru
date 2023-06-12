@@ -1,0 +1,15 @@
+:root {
+  --bg-base: oklch(96.74% 0.001 286.38);
+  --surface: oklch(0% 0 0 / 4%);
+  --surface-divider: oklch(0% 0 0 / 8%);
+  --surface-regular: oklch(91.34% 0.031 254.32);
+  --failure: oklch(57.35% 0.154 29.65);
+  --success: oklch(57.35% 0.144 146.12);
+  --surface-border: oklch(0% 0 0 / 16%);
+  --surface-overlay: oklch(0% 0 0 / 16%);
+  --accent: oklch(56.04% 0.235 274.96);
+  --accent-faded: oklch(49.93% 0.206 275.02);
+  --text-primary: oklch(32.11% 0 0);
+  --text-secondary: oklch(100% 0 0);
+  --text-link: var(--accent);
+}
