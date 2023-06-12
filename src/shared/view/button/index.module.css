@@ -1,0 +1,28 @@
+.button {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 4px;
+
+  &[data-kind='outline'] {
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+
+    &:hover {
+      color: var(--accent-faded);
+      border-color: var(--accent-faded);
+    }
+  }
+
+  &[data-kind='filed'] {
+    color: var(--text-secondary);
+    background: var(--accent);
+
+    &:hover {
+      background-color: var(--accent-faded);
+    }
+  } 
+}
