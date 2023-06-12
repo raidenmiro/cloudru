@@ -1,0 +1,26 @@
+.field {
+  position: relative;
+}
+
+.input {
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+
+  &[aria-invalid='true'] {
+    border-color: var(--failure);
+  }
+
+  &[data-size='M'] {
+    height: 36px;
+  }
+
+  &[data-size="L"] {
+    height: 44px;
+  }
+
+  &[data-variant='secondary'] {
+    background: transparent;
+  }
+}
