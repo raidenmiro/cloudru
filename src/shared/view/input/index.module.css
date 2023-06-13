@@ -1,5 +1,6 @@
 .field {
-  position: relative;
+  display: grid;
+  gap: 9px;
 }
 
 .input {
@@ -7,6 +8,10 @@
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: 4px;
+
+  &:focus {
+    outline-color: var(--accent);
+  }
 
   &[aria-invalid='true'] {
     border-color: var(--failure);
