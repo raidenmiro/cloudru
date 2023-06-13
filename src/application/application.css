@@ -1,1 +1,5 @@
 @import url('../shared/assets/index.css');
+
+body {
+  background: var(--bg-base);
+}
