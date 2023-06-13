@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+}
+
+.input {
+  color: oklch(77.6% 0 0);
+  pointer-events: none;
+  border: 2px solid transparent;
+  outline: none;
+}
+
+.hidden {
+  position: absolute;
+  top: 18px;
+  width: 100%;
+  font-weight: 300;
+ 
+  & input {
+    background: transparent;
+  }
+}
