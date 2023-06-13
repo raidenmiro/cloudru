@@ -1,5 +1,6 @@
 :root {
   --bg-base: oklch(96.74% 0.001 286.38);
+  --bg-secondary: oklch(100% 0 0);
   --surface: oklch(0% 0 0 / 4%);
   --surface-divider: oklch(0% 0 0 / 8%);
   --surface-regular: oklch(91.34% 0.031 254.32);
