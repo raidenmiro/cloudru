@@ -15,6 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^1.2.2",
     "classcat": "^5.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -24,6 +25,8 @@
     "@logux/stylelint-config": "^0.15.1",
     "@neodx/svg": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
@@ -46,6 +49,7 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.32.0",
     "yup": "^1.2.0"
   }
 }
