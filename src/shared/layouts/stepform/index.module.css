@@ -17,6 +17,10 @@ body {
   }
 }
 
+.content {
+  padding-top: 78px;
+}
+
 .footer {
   position: absolute;
   right: 0;

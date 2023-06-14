@@ -7,9 +7,11 @@ import s from './index.module.css'
 interface RootProps {
   page: number
   children: ReactNode
+  onPageChanged(page: number): void
+  className?: string
 }
 
-const Root = ({ page, children }: RootProps) => {
+const Root = ({ page, children, onPageChanged, className }: RootProps) => {
   const arrifyChildren = Children.toArray(children) as ReactElement[]
 
   const steps = arrifyChildren.filter((step) => step.type === Step)
@@ -22,6 +24,7 @@ const Root = ({ page, children }: RootProps) => {
         {Array.from({ length: steps.length }, (_, index) => (
           <Fragment key={index}>
             <Indicator
+              onPressed={() => onPageChanged(index + 1)}
               label={steps[index].props.label}
               isActive={index === currentIndex}
               isCompleted={index < currentIndex}
@@ -32,7 +35,7 @@ const Root = ({ page, children }: RootProps) => {
           </Fragment>
         ))}
       </div>
-      <div className={s.content}>{stepContent}</div>
+      <div className={className}>{stepContent}</div>
     </>
   )
 }
@@ -40,14 +43,17 @@ const Root = ({ page, children }: RootProps) => {
 const Indicator = ({
   label,
   isActive,
-  isCompleted
+  isCompleted,
+  onPressed
 }: {
   label: string
   isActive: boolean
   isCompleted: boolean
+  onPressed(): void
 }) => {
   return (
     <button
+      onClick={onPressed}
       className={cc([
         s.step_item,
         isActive && s.is_active,

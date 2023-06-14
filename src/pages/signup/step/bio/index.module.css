@@ -1,0 +1,8 @@
+.paper {
+  display: grid;
+  gap: 33px;
+}
+
+.input {
+  width: 300px;
+}

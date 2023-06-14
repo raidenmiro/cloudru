@@ -1,0 +1,8 @@
+.paper {
+  display: grid;
+  gap: 9px;
+
+  & > label {
+    line-height: 20px;
+  }
+}
