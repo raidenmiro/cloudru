@@ -12,6 +12,7 @@ export interface InputProps extends BaseInput {
   postfix?: ReactNode
   size?: 'L' | 'M' | 'S'
   variant?: 'primary' | 'secondary'
+  paperClassName?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -25,6 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       variant = 'primary',
       onValueChanged,
       className,
+      paperClassName,
       ...props
     },
     ref
@@ -37,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div className={s.field}>
+      <div className={cc([s.field, s.paperClassName])}>
         <label htmlFor={a11yId}>{label}</label>
         <input
           {...props}
