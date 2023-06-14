@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import s from './index.module.css'
 
 export interface AvatarProps {
-  src?: string
   alt?: string
   fallback?: string
+  src?: string
 }
 
 enum LoadingStatus {

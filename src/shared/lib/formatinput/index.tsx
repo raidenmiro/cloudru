@@ -8,10 +8,10 @@ import s from './index.module.css'
 
 export interface FormattedInputProps {
   label: string
-  value: string
   mask: string
-  placeholder: string
   onChange(v: string): void
+  placeholder: string
+  value: string
 }
 
 const MASK_CHARS = ['^', '_', '#', undefined]

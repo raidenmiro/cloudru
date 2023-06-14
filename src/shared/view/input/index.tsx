@@ -8,11 +8,11 @@ type BaseInput = Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'prefix'>
 export interface InputProps extends BaseInput {
   label: string
   onValueChanged?(value: string): void
-  prefix?: ReactNode
+  paperClassName?: string
   postfix?: ReactNode
+  prefix?: ReactNode
   size?: 'L' | 'M' | 'S'
   variant?: 'primary' | 'secondary'
-  paperClassName?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

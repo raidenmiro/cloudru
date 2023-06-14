@@ -8,10 +8,10 @@ import {
 } from 'react'
 
 interface StepFormContextProps {
-  page: number
-  nextPage(): void
-  prevPage(): void
   choiceStep(page: number): void
+  nextPage(): void
+  page: number
+  prevPage(): void
 }
 
 export const StepFormContext = createContext<StepFormContextProps | null>(null)

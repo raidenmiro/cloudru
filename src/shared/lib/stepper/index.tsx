@@ -5,10 +5,10 @@ import { Children, Fragment } from 'react'
 import s from './index.module.css'
 
 interface RootProps {
-  page: number
   children: ReactNode
-  onPageChanged(page: number): void
   className?: string
+  onPageChanged(page: number): void
+  page: number
 }
 
 const Root = ({ page, children, onPageChanged, className }: RootProps) => {
@@ -65,12 +65,12 @@ const Indicator = ({
 }
 
 interface StepProps {
-  label: string
-  description: string
   children: ReactNode
+  description: string
+  label: string
 }
 
-const Step = ({ label, description, children }: StepProps) => {
+const Step = ({ children }: StepProps) => {
   return <div>{children}</div>
 }
 

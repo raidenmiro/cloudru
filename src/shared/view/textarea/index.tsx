@@ -10,9 +10,9 @@ import { adjustHeight } from './lib'
 type BaseProps = ComponentPropsWithoutRef<'textarea'>
 
 export interface TextareaProps extends BaseProps {
-  submitOnEnter?: boolean
-  maxHeight?: number | string
   label: string
+  maxHeight?: number | string
+  submitOnEnter?: boolean
 }
 
 export const TextArea = ({

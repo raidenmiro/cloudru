@@ -8,8 +8,8 @@ export type SpriteKey = {
 
 export interface IconProps
   extends Omit<SVGProps<SVGSVGElement>, 'name' | 'type'> {
-  path: SpriteKey
   height?: number
+  path: SpriteKey
   width?: number
 }
 
