@@ -11,10 +11,17 @@
   border-radius: 4px;
   outline-color: var(--accent);
 
+  &[aria-expanded='true'] {
+    & svg {
+      transform: rotate(180deg);
+    }
+  }
+
   & svg {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     opacity: 50%;
+    transition: all 0.3s ease;
   };
 }
 
