@@ -1,0 +1,77 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  width: 677px;
+  height: fit-content;
+  padding-block-start: 3px;
+  padding-block-end: 33px;
+  padding-inline: 3px;
+  overflow: auto;
+}
+
+.step_item {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  background: oklch(72.52% 0 0);
+  border: none;
+  border-radius: 9999px;
+
+  &.is_completed& {
+    background: var(--accent);
+  }
+
+  &.is_active {
+    background: var(--accent);
+
+    &::before {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: block;
+      width: 4px;
+      height: 4px;
+      content: '';
+      background: oklch(100% 0 0);
+      border-radius: 9999px;
+    }
+  }
+}
+
+.step_label {
+  position: absolute;
+  top: 35px;
+  right: 12px;
+}
+
+.step_item::after {
+  position: absolute;
+  top: 5px;
+  left:  5px;
+  z-index: 1;
+  width: 12px;
+  height: 10px;
+  content: '';
+
+  .is_completed& {
+    background: url(./check.svg) no-repeat;
+    filter: invert(1);
+  }
+}
+
+.divider {
+  box-sizing: border-box;
+  flex: 1;
+  height: 8px;
+  margin-inline:  -3px;
+  background: var(--surface-divider);
+  transition: background-color 150ms ease;
+
+  &.is_filled {
+    background: var(--accent);
+  }
+}

@@ -21,6 +21,7 @@
     &:hover, &:focus {
       color: var(--accent-faded);
       border-color: var(--accent-faded);
+      box-shadow: var(--surface-shadow) 0 0 0 6px;
     }
   }
 
