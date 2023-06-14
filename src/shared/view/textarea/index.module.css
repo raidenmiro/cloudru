@@ -1,0 +1,25 @@
+.paper {
+  display: grid;
+  gap: 8px;
+
+  & label {
+    line-height: 20px;
+    color: var(--text-primary)
+  }
+
+  & span {
+    font-size: 12px;
+    color: var(--text-note);
+  }
+}
+
+.textarea {
+  width: 680px;
+  min-height: 84px;
+  padding: 5px;
+  resize: none;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  outline-color: var(--accent);
+}
