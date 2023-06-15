@@ -12,6 +12,11 @@ interface StepFormContextProps {
   nextPage(): void
   page: number
   prevPage(): void
+  stepObserver: {
+    addListener: (listener: () => void) => void
+    removeListener: (listener: () => void) => void
+    notify: () => void
+  }
 }
 
 export const StepFormContext = createContext<StepFormContextProps | null>(null)
@@ -28,6 +33,7 @@ export const useLayoutProps = () => {
 
 const MAX_PAGE_STEP = 3
 const MIN_PAGE_STEP = 1
+const LISTENERS: Array<() => void> = []
 
 export const StepFormProvider = ({ children }: { children: ReactNode }) => {
   const [page, setPage] = useState(1)
@@ -44,14 +50,29 @@ export const StepFormProvider = ({ children }: { children: ReactNode }) => {
     setPage(Math.min(MAX_PAGE_STEP, Math.max(MIN_PAGE_STEP, page)))
   }, [])
 
+  const stepObserver = useMemo(() => {
+    return {
+      addListener: (listener: () => void) => {
+        LISTENERS.push(listener)
+      },
+      removeListener: (listener: () => void) => {
+        LISTENERS.splice(LISTENERS.indexOf(listener), 1)
+      },
+      notify: () => {
+        LISTENERS.forEach((listener) => listener())
+      }
+    }
+  }, [])
+
   const state = useMemo(() => {
     return {
       page,
       nextPage,
       prevPage,
-      choiceStep
+      choiceStep,
+      stepObserver
     }
-  }, [choiceStep, nextPage, page, prevPage])
+  }, [choiceStep, nextPage, page, prevPage, stepObserver])
 
   return (
     <StepFormContext.Provider value={state}>

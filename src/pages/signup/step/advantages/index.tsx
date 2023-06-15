@@ -1,6 +1,14 @@
+import { useWatchSubmit } from '@/shared/layouts/stepform/hooks'
 import { Input } from '@/shared/view/input'
+import { useCallback } from 'react'
 
 export const Advantages = () => {
+  const watchButtonPress = useCallback(() => {
+    console.log('watchButtonPress')
+  }, [])
+
+  useWatchSubmit(watchButtonPress)
+
   return (
     <form>
       <fieldset>

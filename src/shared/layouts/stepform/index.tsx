@@ -42,13 +42,20 @@ const Content = ({ children }: Pick<StepFormProps, 'children'>) => {
 }
 
 const Footer = () => {
-  const { page, nextPage, prevPage } = useLayoutProps()
+  const { page, nextPage, prevPage, stepObserver } = useLayoutProps()
+
+  const handleClick = () => {
+    stepObserver.notify()
+  }
+
   return (
     <footer className={s.footer}>
       <Button kind="outline" onClick={prevPage}>
         Назад
       </Button>
-      <Button onClick={nextPage}>{page === 3 ? 'Отправить' : 'Далее'}</Button>
+      <Button onClick={handleClick}>
+        {page === 3 ? 'Отправить' : 'Далее'}
+      </Button>
     </footer>
   )
 }
