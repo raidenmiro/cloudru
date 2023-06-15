@@ -27,15 +27,11 @@ export const createRouter = (routes: Record<string, () => string>) => {
     matcher.push({ name: key, match: createPattern(routes[key]()) })
   }
 
-  let prev: string, current: string
+  let current: string
   const parse = (path: string) => {
-    if (prev !== path) {
-      prev = path
-
-      for (const { name, match } of matcher) {
-        if (match.test(path)) {
-          return name
-        }
+    for (const { name, match } of matcher) {
+      if (match.test(path)) {
+        return name
       }
     }
   }
@@ -46,12 +42,13 @@ export const createRouter = (routes: Record<string, () => string>) => {
   }
 
   const listener = (_: PopStateEvent) => {
-    const parsed = parse(window.location.pathname)
+    let parsed = parse(window.location.pathname)
 
-    if (parsed) {
-      current = parsed
+    if (!parsed) {
+      parsed = window.location.pathname
     }
 
+    current = parsed
     notify(current)
   }
 
