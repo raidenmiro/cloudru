@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "sprite": "sprite --root assets -o public/sprite -d src/shared/assets/icon/sprite.h.ts",
+    "sprite": "sprite --root assets -o public/sprite -d src/shared/view/icon/sprite.h.ts",
     "lint": "tsc --noEmit && eslint ./src && stylelint ./src/**/*.css",
     "preview": "vite preview"
   },
