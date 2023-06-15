@@ -6,6 +6,7 @@ import { usePrevious } from '@/shared/lib/hooks/use-previos'
 
 import s from './index.module.css'
 import { adjustHeight } from './lib'
+import { amountOfChars } from '@/shared/lib/string'
 
 type BaseProps = ComponentPropsWithoutRef<'textarea'>
 
@@ -24,7 +25,9 @@ export const TextArea = ({
   const [value, setInput] = useState('')
   const previous = usePrevious(value)
   const ref = useRef<HTMLTextAreaElement>(null)
+
   const a11yId = useId()
+  const count = amountOfChars(value)
 
   useEffect(() => {
     const textarea = ref.current
@@ -46,7 +49,10 @@ export const TextArea = ({
         className={cc([s.textarea, className])}
         onChange={(e) => setInput(e.target.value)}
       />
-      <span>Tip</span>
+      <div className={s.footer}>
+        <span>Tip</span>
+        <span>{count}</span>
+      </div>
     </div>
   )
 }

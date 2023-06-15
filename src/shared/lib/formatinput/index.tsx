@@ -1,5 +1,6 @@
 /* eslint-disable default-case */
 import type { FormEvent, KeyboardEvent, MouseEvent } from 'react'
+import { useId } from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 
 import { Input } from '@/shared/view/input'
@@ -9,6 +10,7 @@ import s from './index.module.css'
 export interface FormattedInputProps {
   label: string
   mask: string
+  name: string
   onChange(v: string): void
   placeholder: string
   value: string
@@ -91,11 +93,12 @@ export const FormattedInput = ({
   value,
   mask,
   placeholder,
-  onChange
+  onChange,
+  name
 }: FormattedInputProps) => {
   const ref = useRef<HTMLInputElement | null>(null)
   const formattedValue = defaultFormatter(value, mask)
-  const id = useRef(Math.random().toString(36))
+  const id = useId()
 
   const getPattern = useCallback(
     (value: string): string => {
@@ -135,6 +138,7 @@ export const FormattedInput = ({
   const handleInput = useCallback(
     (e: FormEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement
+
       const value = target.value.slice(0, mask.length)
       const savePos = target.selectionStart || getStartPosition(mask)
 
@@ -229,8 +233,9 @@ export const FormattedInput = ({
         <div className={s.hidden}>
           <Input
             label=""
-            id={id.current}
+            id={id}
             ref={ref}
+            name={name}
             value={formattedValue}
             onInput={handleInput}
             onKeyDown={handleKeyDown}

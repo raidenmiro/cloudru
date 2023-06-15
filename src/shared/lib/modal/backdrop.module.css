@@ -1,0 +1,54 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: auto;
+  text-align: center;
+}
+
+.backdrop::before {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+  content: '';
+}
+
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: var(--surface-overlay);
+  opacity: 100%;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-enter .layer {
+  opacity: 0%;
+}
+
+.paper-enter-active .layer {
+  opacity: 100%;
+}
+
+.paper-leave .layer {
+  opacity: 100%;
+}
+
+.paper-leave-active .layer {
+  opacity: 0%;
+}
+
+.position {
+  position: relative;
+  z-index: 1001;
+  display: inline-block;
+  width: 500px;
+  max-width: 90%;
+  margin: 20px auto;
+  vertical-align: middle;
+  outline: none;
+}

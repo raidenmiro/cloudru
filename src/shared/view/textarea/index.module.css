@@ -6,11 +6,6 @@
     line-height: 20px;
     color: var(--text-primary)
   }
-
-  & span {
-    font-size: 12px;
-    color: var(--text-note);
-  }
 }
 
 .textarea {
@@ -22,4 +17,15 @@
   border: 1px solid var(--surface-border);
   border-radius: 4px;
   outline-color: var(--accent);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & span {
+    font-size: 12px;
+    color: var(--text-note);
+  }
 }

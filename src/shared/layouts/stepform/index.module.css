@@ -2,6 +2,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:has(.container[data-step='3']) {
+    align-items: flex-start;
+    padding-top: 24px;
+  }
 }
 
 .container {
@@ -11,6 +16,10 @@ body {
   padding: 62px 112px;
   background: var(--bg-secondary);
   border-radius: 24px;
+
+  &[data-step='3'] {
+    height: 500px;
+  }
 
   & main {
     margin-top: 69px;

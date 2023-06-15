@@ -15,31 +15,40 @@ export interface StepFormProps {
 export function StepForm({ children, className }: StepFormProps) {
   return (
     <StepFormProvider>
-      <div className={cc([s.container, className])}>
-        <Content>{children}</Content>
-        <footer className={s.footer}>
-          <Button kind="outline">Назад</Button>
-          <Button>Далее</Button>
-        </footer>
-      </div>
+      <Container className={className}>{children}</Container>
     </StepFormProvider>
   )
 }
 
-const Content = ({ children }: Pick<StepFormProps, 'children'>) => {
+const Container = ({ children, className }: StepFormProps) => {
   const { page } = useLayoutProps()
 
   return (
-    <Stepper page={page}>
-      <Stepper.Step label="1" description="Step 1 description">
-        <main className={s.className}>{children}</main>
-      </Stepper.Step>
-      <Stepper.Step label="2" description="Step 2 description">
-        2
-      </Stepper.Step>
-      <Stepper.Step label="3" description="Step 3 description">
-        3
-      </Stepper.Step>
+    <div data-step={page} className={cc([s.container, className])}>
+      <Content>{children}</Content>
+      <Footer />
+    </div>
+  )
+}
+
+const Content = ({ children }: Pick<StepFormProps, 'children'>) => {
+  const { page, choiceStep } = useLayoutProps()
+
+  return (
+    <Stepper page={page} onPageChanged={choiceStep} className={s.content}>
+      {children}
     </Stepper>
+  )
+}
+
+const Footer = () => {
+  const { page, nextPage, prevPage } = useLayoutProps()
+  return (
+    <footer className={s.footer}>
+      <Button kind="outline" onClick={prevPage}>
+        Назад
+      </Button>
+      <Button onClick={nextPage}>{page === 3 ? 'Отправить' : 'Далее'}</Button>
+    </footer>
   )
 }
