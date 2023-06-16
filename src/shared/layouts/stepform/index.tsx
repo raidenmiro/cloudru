@@ -2,7 +2,6 @@ import cc from 'classcat'
 import type { ReactNode } from 'react'
 
 import { Stepper } from '@/shared/lib/stepper'
-import { Button } from '@/shared/view/button'
 
 import { StepFormProvider, useLayoutProps } from './context'
 import s from './index.module.css'
@@ -26,7 +25,6 @@ const Container = ({ children, className }: StepFormProps) => {
   return (
     <div data-step={page} className={cc([s.container, className])}>
       <Content>{children}</Content>
-      <Footer />
     </div>
   )
 }
@@ -38,24 +36,5 @@ const Content = ({ children }: Pick<StepFormProps, 'children'>) => {
     <Stepper page={page} onPageChanged={choiceStep} className={s.content}>
       {children}
     </Stepper>
-  )
-}
-
-const Footer = () => {
-  const { page, nextPage, prevPage, stepObserver } = useLayoutProps()
-
-  const handleClick = () => {
-    stepObserver.notify()
-  }
-
-  return (
-    <footer className={s.footer}>
-      <Button kind="outline" onClick={prevPage}>
-        Назад
-      </Button>
-      <Button onClick={handleClick}>
-        {page === 3 ? 'Отправить' : 'Далее'}
-      </Button>
-    </footer>
   )
 }

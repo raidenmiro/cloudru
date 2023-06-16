@@ -1,17 +1,17 @@
-import { useWatchSubmit } from '@/shared/layouts/stepform/hooks'
+import { Button } from '@/shared/view/button'
 import { TextArea } from '@/shared/view/textarea'
-import { useCallback } from 'react'
+import s from './index.module.css'
 
 export const AboutMe = () => {
-  const watchButtonPress = useCallback(() => {
-    console.log('watchButtonPress')
-  }, [])
-
-  useWatchSubmit(watchButtonPress)
-
   return (
     <form>
       <TextArea label="About" maxHeight={130} maxLength={200} />
+      <footer className={s.footer}>
+        <Button kind="outline" type="button">
+          Назад
+        </Button>
+        <Button>Далее</Button>
+      </footer>
     </form>
   )
 }
