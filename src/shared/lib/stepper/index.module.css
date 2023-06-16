@@ -1,7 +1,7 @@
 .stepper {
   display: flex;
   align-items: center;
-  width: 677px;
+  max-width: 677px;
   height: fit-content;
   padding-block-start: 3px;
   padding-block-end: 33px;
