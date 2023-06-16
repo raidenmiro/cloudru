@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div className={cc([s.field, s.paperClassName])}>
+      <div className={cc([s.field, paperClassName])}>
         <label htmlFor={a11yId}>{label}</label>
         <input
           {...props}
