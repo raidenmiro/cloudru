@@ -1,22 +1,35 @@
 /* eslint-disable default-case */
-import type { FormEvent, KeyboardEvent, MouseEvent } from 'react'
+import type {
+  ComponentPropsWithoutRef,
+  FormEvent,
+  KeyboardEvent,
+  MouseEvent
+} from 'react'
+import { forwardRef } from 'react'
 import { useId } from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 
 import { Input } from '@/shared/view/input'
 
 import s from './index.module.css'
+import { mergeRefs } from '../merge-refs'
 
-export interface FormattedInputProps {
+type BaseProps = Omit<
+  ComponentPropsWithoutRef<'input'>,
+  'value' | 'name' | 'size'
+>
+
+export interface FormattedInputProps extends BaseProps {
   label: string
   mask: string
   name: string
-  onChange(v: string): void
+  onChangeValue(v: string): void
   placeholder: string
   value: string
 }
 
 const MASK_CHARS = ['^', '_', '#', undefined]
+const NOOP = () => {}
 
 export const defaultParser = (value: string | null | undefined): string => {
   if (value === null || value === undefined) {
@@ -88,161 +101,170 @@ const getMaskPosition = (
   return pos
 }
 
-export const FormattedInput = ({
-  label,
-  value,
-  mask,
-  placeholder,
-  onChange,
-  name
-}: FormattedInputProps) => {
-  const ref = useRef<HTMLInputElement | null>(null)
-  const formattedValue = defaultFormatter(value, mask)
-  const id = useId()
-
-  const getPattern = useCallback(
-    (value: string): string => {
-      if (value.length === 0) {
-        return ''
-      }
-
-      const maskChars = mask.split('').slice(0, value.length)
-      maskChars.unshift('')
-      const reStr = maskChars
-        .join('\\')
-        .replace(/\\#/g, '\\d')
-        .replace(/\\\^/g, '[A-ZА-Я]')
-        .replace(/\\_/g, '[a-zа-я]')
-
-      return `^${reStr}$`
+export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
+  (
+    {
+      label,
+      value,
+      mask,
+      placeholder,
+      onChange,
+      onChangeValue,
+      name,
+      ...props
     },
-    [mask]
-  )
+    forwardedRef
+  ) => {
+    const ref = useRef<HTMLInputElement | null>(null)
+    const formattedValue = defaultFormatter(value, mask)
+    const id = useId()
 
-  const validate = useCallback(
-    (value: string): boolean => {
-      if (value.length === 0) {
-        return true
-      }
-
-      const re = new RegExp(getPattern(value))
-
-      if (re.test(value)) {
-        return true
-      }
-      return false
-    },
-    [getPattern]
-  )
-
-  const handleInput = useCallback(
-    (e: FormEvent<HTMLInputElement>) => {
-      const target = e.target as HTMLInputElement
-
-      const value = target.value.slice(0, mask.length)
-      const savePos = target.selectionStart || getStartPosition(mask)
-
-      const parsedValue = defaultParser(value)
-      onChange(parsedValue)
-
-      if (savePos < value.length) {
-        setCaret(target, savePos)
-      }
-    },
-    [mask, onChange]
-  )
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      const caret = ref.current?.selectionStart || getStartPosition(mask)
-      const target = e.target as HTMLInputElement
-
-      switch (e.key) {
-        case 'ArrowUp':
-        case 'Home':
-        case 'Escape':
-          setCaret(target, getStartPosition(mask))
-          e.preventDefault()
-          e.stopPropagation()
-          break
-
-        case 'Backspace': {
-          const valuePos = getValuePosition(value, mask, caret)
-          const newValue = `${value.slice(
-            0,
-            Math.max(0, valuePos - 1)
-          )}${value.slice(valuePos, value.length)}`
-          let maskPos = getMaskPosition(newValue, mask, valuePos)
-
-          maskPos = Math.max(maskPos - 1, getStartPosition(mask))
-          onChange(newValue)
-          setCaret(target, maskPos)
-          e.preventDefault()
-          e.stopPropagation()
-          break
+    const getPattern = useCallback(
+      (value: string): string => {
+        if (value.length === 0) {
+          return ''
         }
 
-        case 'Delete': {
-          const valuePos = getValuePosition(value, mask, caret)
-          const newValue = `${value.slice(
-            0,
-            Math.max(0, valuePos)
-          )}${value.slice(valuePos + 1, value.length)}`
+        const maskChars = mask.split('').slice(0, value.length)
+        maskChars.unshift('')
+        const reStr = maskChars
+          .join('\\')
+          .replace(/\\#/g, '\\d')
+          .replace(/\\\^/g, '[A-ZА-Я]')
+          .replace(/\\_/g, '[a-zа-я]')
 
-          onChange(newValue)
-          setCaret(target, caret)
-          e.preventDefault()
-          e.stopPropagation()
-          break
+        return `^${reStr}$`
+      },
+      [mask]
+    )
+
+    const validate = useCallback(
+      (value: string): boolean => {
+        if (value.length === 0) {
+          return true
         }
-      }
-    },
-    [mask, onChange, value]
-  )
 
-  const handleMouseDown = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as HTMLInputElement
-      setCaret(target, 0, () => {
-        const start = getStartPosition(mask)
-        if ((target.selectionStart || 0) < start) {
-          return start
+        const re = new RegExp(getPattern(value))
+
+        if (re.test(value)) {
+          return true
         }
-        return target.selectionStart || 0
-      })
-    },
-    [mask]
-  )
+        return false
+      },
+      [getPattern]
+    )
 
-  useEffect(() => {
-    validate(formattedValue)
-  }, [formattedValue, validate])
+    const handleInput = useCallback(
+      (e: FormEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement
 
-  return (
-    <div>
-      <div className={s.container}>
-        <Input
-          label={label}
-          tabIndex={-1}
-          className={s.input}
-          value={formattedValue.concat(
-            placeholder.slice(formattedValue.length)
-          )}
-          onChange={() => {}}
-        />
-        <div className={s.hidden}>
+        const value = target.value.slice(0, mask.length)
+        const savePos = target.selectionStart || getStartPosition(mask)
+
+        const parsedValue = defaultParser(value)
+        onChangeValue(parsedValue)
+
+        if (savePos < value.length) {
+          setCaret(target, savePos)
+        }
+      },
+      [mask, onChangeValue]
+    )
+
+    const handleKeyDown = useCallback(
+      (e: KeyboardEvent) => {
+        const caret = ref.current?.selectionStart || getStartPosition(mask)
+        const target = e.target as HTMLInputElement
+
+        switch (e.key) {
+          case 'ArrowUp':
+          case 'Home':
+          case 'Escape':
+            setCaret(target, getStartPosition(mask))
+            e.preventDefault()
+            e.stopPropagation()
+            break
+
+          case 'Backspace': {
+            const valuePos = getValuePosition(value, mask, caret)
+            const newValue = `${value.slice(
+              0,
+              Math.max(0, valuePos - 1)
+            )}${value.slice(valuePos, value.length)}`
+            let maskPos = getMaskPosition(newValue, mask, valuePos)
+
+            maskPos = Math.max(maskPos - 1, getStartPosition(mask))
+            onChangeValue(newValue)
+            setCaret(target, maskPos)
+            e.preventDefault()
+            e.stopPropagation()
+            break
+          }
+
+          case 'Delete': {
+            const valuePos = getValuePosition(value, mask, caret)
+            const newValue = `${value.slice(
+              0,
+              Math.max(0, valuePos)
+            )}${value.slice(valuePos + 1, value.length)}`
+
+            onChangeValue(newValue)
+            setCaret(target, caret)
+            e.preventDefault()
+            e.stopPropagation()
+            break
+          }
+        }
+      },
+      [mask, onChangeValue, value]
+    )
+
+    const handleMouseDown = useCallback(
+      (e: MouseEvent) => {
+        const target = e.target as HTMLInputElement
+        setCaret(target, 0, () => {
+          const start = getStartPosition(mask)
+          if ((target.selectionStart || 0) < start) {
+            return start
+          }
+          return target.selectionStart || 0
+        })
+      },
+      [mask]
+    )
+
+    useEffect(() => {
+      validate(formattedValue)
+    }, [formattedValue, validate])
+
+    return (
+      <div>
+        <div className={s.container}>
           <Input
-            label=""
-            id={id}
-            ref={ref}
-            name={name}
-            value={formattedValue}
-            onInput={handleInput}
-            onKeyDown={handleKeyDown}
-            onMouseDown={handleMouseDown}
+            label={label}
+            tabIndex={-1}
+            className={s.input}
+            value={formattedValue.concat(
+              placeholder.slice(formattedValue.length)
+            )}
+            onChange={NOOP}
           />
+          <div className={s.hidden}>
+            <Input
+              label=""
+              id={id}
+              ref={mergeRefs(ref, forwardedRef)}
+              name={name}
+              value={formattedValue}
+              onInput={handleInput}
+              onKeyDown={handleKeyDown}
+              onMouseDown={handleMouseDown}
+              onChange={onChange}
+              {...props}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
