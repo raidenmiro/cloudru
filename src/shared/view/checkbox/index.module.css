@@ -1,0 +1,46 @@
+.paper {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0%;
+}
+
+.label {
+  position: relative;
+  height: 19px;
+  line-height: 26px;
+  vertical-align: middle;
+}
+
+.label::before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  content: '';
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+}
+
+.label::after {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  content: '';
+}
+
+.checkbox:checked + .label::before {
+  background: var(--accent);
+}
+
+.checkbox:checked + .label::after {
+  background: url(./check.svg) no-repeat;
+  filter: invert(1);
+  background-size: contain;
+}
