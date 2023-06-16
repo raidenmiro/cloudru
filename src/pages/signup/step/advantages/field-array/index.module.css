@@ -1,0 +1,33 @@
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input {
+  width: 300px;
+}
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding-inline: var(--unit-x2);
+  line-height: 1;
+  color: var(--text-note);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+
+  & svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--failure-faded);
+    }
+  }
+}

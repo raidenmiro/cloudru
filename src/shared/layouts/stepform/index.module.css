@@ -7,6 +7,10 @@ body {
     align-items: flex-start;
     padding-top: 24px;
   }
+
+  @media (width <= 992px) {
+    padding-inline: 25px;
+  }
 }
 
 .container {
@@ -23,6 +27,10 @@ body {
 
   & main {
     margin-top: 69px;
+  }
+
+  @media (width <= 992px) {
+    width: 800px;
   }
 }
 

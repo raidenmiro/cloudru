@@ -1,5 +1,5 @@
-import type { FormEvent } from 'react'
-import { useRef } from 'react'
+import type { ComponentPropsWithoutRef, FormEvent } from 'react'
+import { forwardRef } from 'react'
 import { useState } from 'react'
 
 import { FormattedInput } from '@/shared/lib/formatinput'
@@ -8,16 +8,30 @@ import { Button } from '@/shared/view/button'
 import { Icon } from '@/shared/view/icon'
 import { Input } from '@/shared/view/input'
 
-import { data } from './data'
-import s from './index.module.css'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
 import { router } from '../router'
+import { data } from './data'
+import { startedForm } from './schema'
+import s from './index.module.css'
+import { ErrorMessage } from '@hookform/error-message'
 
-export function Started() {
-  const ref = useRef<HTMLFormElement>(null)
+/**
+ *
+ * because we use custom error message in react-hook-form we need to use `noValidate`
+ */
+export const Started = () => {
+  const { watch, setValue, register, formState } = useForm({
+    resolver: yupResolver(startedForm),
+    mode: 'onChange'
+  })
+
+  usePersistForm('started', { setValue, watch })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    router.go('/started')
+    // router.go('/started')
   }
 
   return (
@@ -30,13 +44,16 @@ export function Started() {
         </div>
       </header>
       <main className={s.main}>
-        <form ref={ref} className={s.form} onSubmit={handleSubmit}>
-          <PhoneInput />
+        <form className={s.form} onSubmit={handleSubmit} noValidate>
+          <PhoneInput {...register('phone')} />
+          <ErrorMessage errors={formState.errors} name="phone" />
           <Input
-            name="email"
+            type="email"
             label="Email"
             placeholder="tim.jennings@example.com"
+            {...register('email')}
           />
+          <ErrorMessage errors={formState.errors} name="email" />
           <Button type="submit" kind="filled">
             Начать
           </Button>
@@ -61,16 +78,21 @@ const Socials = () => {
   )
 }
 
-const PhoneInput = () => {
+const PhoneInput = forwardRef<
+  HTMLInputElement,
+  ComponentPropsWithoutRef<'input'>
+>((props, ref) => {
   const [value, setValue] = useState('')
   return (
     <FormattedInput
+      ref={ref}
+      {...props}
       name="phone"
       label="Номер телефона"
       placeholder="+7 (999) 999 99 99"
       mask="+# (###) ### ## ##"
       value={value}
-      onChange={setValue}
+      onChangeValue={setValue}
     />
   )
-}
+})

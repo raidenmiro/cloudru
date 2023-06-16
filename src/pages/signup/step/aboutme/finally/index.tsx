@@ -42,14 +42,16 @@ export const FinallyModal = ({ open, type, onHide }: FinallyModalProps) => {
       title="Completed"
       className={s.modal}
       description="Check your data">
-      <header className={cc([s.header, s.is_success])}>
+      <header className={cc([s.header, type === 'success' && s.is_success])}>
         <h2>{title}</h2>
-        <button className={s.close}>
+        <button className={s.close} data-type={type}>
           <Icon path="sprite/close" />
         </button>
       </header>
       <div className={s.content}>
-        <Icon path={content} className={s.indicator}/>
+        <span data-type={type} className={s.icon_wrapper}>
+          <Icon path={content} className={s.indicator} />
+        </span>
       </div>
       <footer data-type={type} className={cc([s.footer])}>
         <Button onClick={() => action.onPress(onHide)}>{action.text}</Button>
