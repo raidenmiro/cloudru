@@ -1,0 +1,11 @@
+.label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.radio {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
