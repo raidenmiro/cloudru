@@ -1,5 +1,5 @@
 import './application.css'
-import { Page } from '@/pages/page'
+import { Page } from '@/pages'
 
 export function App() {
   return (

@@ -4,7 +4,7 @@ import { Started } from './started/page'
 import { router } from './router'
 
 export const Page = () => {
-  const [route, setRoute] = useState(() => router.get())
+  const [route, setRoute] = useState('/')
 
   useEffect(() => {
     const unsub = router.listen((path) => {
