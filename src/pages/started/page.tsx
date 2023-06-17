@@ -1,21 +1,20 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { yupResolver } from '@hookform/resolvers/yup'
 import type { ComponentPropsWithoutRef, FormEvent } from 'react'
-import { forwardRef } from 'react'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { FormattedInput } from '@/shared/lib/formatinput'
+import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
 import { Avatar } from '@/shared/view/avatar'
 import { Button } from '@/shared/view/button'
 import { Icon } from '@/shared/view/icon'
 import { Input } from '@/shared/view/input'
 
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
 import { router } from '../router'
 import { data } from './data'
-import { startedForm } from './schema'
 import s from './index.module.css'
-import { ErrorMessage } from '@hookform/error-message'
+import { startedForm } from './schema'
 
 /**
  *
@@ -23,15 +22,14 @@ import { ErrorMessage } from '@hookform/error-message'
  */
 export const Started = () => {
   const { watch, setValue, register, formState } = useForm({
-    resolver: yupResolver(startedForm),
-    mode: 'onChange'
+    resolver: yupResolver(startedForm)
   })
 
   usePersistForm('started', { setValue, watch })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // router.go('/started')
+    router.go('/started')
   }
 
   return (
@@ -45,11 +43,15 @@ export const Started = () => {
       </header>
       <main className={s.main}>
         <form className={s.form} onSubmit={handleSubmit} noValidate>
-          <PhoneInput {...register('phone')} />
+          <PhoneInput
+            {...register('phone')}
+            aria-invalid={Boolean(formState.errors.phone)}
+          />
           <ErrorMessage errors={formState.errors} name="phone" />
           <Input
             type="email"
             label="Email"
+            aria-invalid={Boolean(formState.errors.email)}
             placeholder="tim.jennings@example.com"
             {...register('email')}
           />
