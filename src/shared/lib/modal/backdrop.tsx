@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import { useEffect, useRef } from 'react'
+import type { PointerEvent, ReactNode } from 'react'
+import { useCallback, useRef } from 'react'
 
 import { CssTransition } from '../csstransition'
 import s from './backdrop.module.css'
@@ -10,25 +10,26 @@ export interface BackdropProps {
   open: boolean
 }
 
-const EVENTS = ['mousedown', 'touchstart']
-
 export function Backdrop({ children, onPress, open }: BackdropProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const ref = overlayRef.current
+  const onHandlePress = useCallback(
+    (e: PointerEvent) => {
+      const isPrimary = e.button === 0 && e.isPrimary
 
-    if (!ref) return
-
-    EVENTS.forEach((eventName) => ref.addEventListener(eventName, onPress))
-    return () => {
-      EVENTS.forEach((eventName) => ref.removeEventListener(eventName, onPress))
-    }
-  }, [onPress])
+      if (isPrimary && e.target === overlayRef.current) {
+        onPress()
+      }
+    },
+    [onPress]
+  )
 
   return (
-    <CssTransition clearTime={300} name={s.paper} visible={open}>
-      <div className={s.backdrop} ref={overlayRef}>
+    <CssTransition clearTime={1000} name={s.paper} visible={open}>
+      <div
+        className={s.backdrop}
+        onPointerDown={onHandlePress}
+        ref={overlayRef}>
         <div className={s.layer} />
         <div className={s.position}>{children}</div>
       </div>

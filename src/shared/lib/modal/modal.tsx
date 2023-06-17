@@ -1,4 +1,6 @@
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import type { ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 import { useHotkey } from '../hooks/use-hotkey'
@@ -23,7 +25,18 @@ export const Modal = ({
   open,
   title
 }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null)
+
   useHotkey({ Escape: () => onHide() })
+
+  useEffect(() => {
+    const node = modalRef.current
+
+    if (node) disableBodyScroll(node)
+    return () => {
+      if (node) enableBodyScroll(node)
+    }
+  }, [])
 
   if (!open) {
     return null
@@ -31,7 +44,10 @@ export const Modal = ({
 
   return createPortal(
     <Backdrop onPress={onHide} open={open}>
-      <div className={className} {...getA11y(title, description)}>
+      <div
+        className={className}
+        ref={modalRef}
+        {...getA11y(title, description)}>
         {children}
       </div>
     </Backdrop>,
