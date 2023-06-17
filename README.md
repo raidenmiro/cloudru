@@ -38,7 +38,7 @@ pnpm install
 pnpm dev
 ```
 
-Дальше перейдите по данному url <http://localhost:5173/>, чтобы посмотреть результаты.
+Дальше перейдите по данному url <http://localhost:5173>, чтобы посмотреть результаты.
 
 ### Запуск с docker
 
@@ -60,7 +60,7 @@ docker ps
 $ docker ps
 
 CONTAINER ID   IMAGE              COMMAND                   CREATED              STATUS              PORTS                               NAMES
-7e34d10fef75   cloudru_frontend   "nginx -g 'daemon of…"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, :::80->80/tcp   frontend
+7e34d10fef75   cloudru_frontend   "nginx -g 'daemon of…"    About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, :::80->80/tcp   frontend
 ```
 
 Перейдем по адресу <http://localhost/>  и увидим запущенное приложение.
