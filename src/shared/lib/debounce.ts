@@ -1,7 +1,12 @@
-export function debounce(ms: number, cb: (...args: unknown[]) => void) {
+export function debounce<Args extends unknown[]>(
+  ms: number,
+  cb: (...args: Args) => void
+) {
   let timeout: number
-  return (...args: unknown[]) => {
+  return (...args: Args) => {
     clearTimeout(timeout)
-    timeout = window.setTimeout(() => cb(...args), ms)
+    timeout = window.setTimeout(() => {
+      cb(...args)
+    }, ms)
   }
 }
