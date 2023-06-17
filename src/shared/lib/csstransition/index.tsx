@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from 'react'
 import { cloneElement, isValidElement, useEffect, useState } from 'react'
 
-// simplify implementation
-
 interface Props {
   className?: string
   clearTime?: number
@@ -63,6 +61,7 @@ export const CssTransition = ({
       clearTimeout(clearClassesTimer)
     }
   }, [visible, renderable, enterTime, leaveTime, name, clearTime])
+
   if (!isValidElement(children) || !renderable) return null
 
   return cloneElement(children as never, {
@@ -71,3 +70,4 @@ export const CssTransition = ({
   })
 }
 CssTransition.defaultProps = defaultProps
+CssTransition.displayName = 'CssTransition'
