@@ -1,0 +1,69 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the repository ✅
+        uses: actions/checkout@v3
+
+      - name: Install tools from asdf config 📈
+        uses: ai/asdf-cache-action@v1
+
+      - name: Setup nodejs 🌐
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      - name: Install deps 💚
+        run: pnpm install
+      
+      - name: Run tests and lint ✨
+        run: pnpm lint && pnpm test
+    
+  deploy:
+    name: Deploy 🚀
+    runs-on: ubuntu-latest
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    environment:
+      name: production
+      url: https://optimax-dev-test-task.web.app
+    needs:
+      - checks
+    steps:
+      - name: Checkout the repository ✅
+        uses: actions/checkout@v3
+
+      - name: Install tools from asdf config 🎉
+        uses: ai/asdf-cache-action@v1
+        with:
+          dependencies-cache: production
+
+      - name: Install dependencies ⬆️
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build app
+        run: pnpm build
+      
+      - name: Deploy application 👷
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLOUDRU_TEST_TASK }}'
+          projectId: cloudru-test-task
+          channelId: live
+      
+      - name: Clean build directory ♻️
+        run: rm -Rf ./dist/
