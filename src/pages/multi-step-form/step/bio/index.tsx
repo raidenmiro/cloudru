@@ -1,5 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { sendForm } from '@/shared/api'
@@ -15,6 +16,7 @@ import { FieldControl } from './ui/field'
 
 export const Bio = () => {
   const { nextPage } = useLayoutProps()
+  const [loading, setLoading] = useState(false)
   const { formState, handleSubmit, register, setValue, watch } = useForm({
     resolver: yupResolver(bioSchema)
   })
@@ -22,8 +24,10 @@ export const Bio = () => {
   usePersistForm('bio', { setValue, watch })
 
   const onSubmit = handleSubmit((data) => {
+    setLoading(true)
     sendForm(data).then(() => {
       nextPage()
+      setLoading(false)
     })
   })
 
@@ -74,7 +78,9 @@ export const Bio = () => {
         <Button kind="outline" onClick={() => history.back()} type="button">
           Назад
         </Button>
-        <Button>Далее</Button>
+        <Button disabled={loading} loading={loading} type="submit">
+          Далее
+        </Button>
       </footer>
     </form>
   )
