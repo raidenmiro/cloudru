@@ -6,7 +6,8 @@ module.exports = configure({
     presets.typescript(),
     presets.prettier(),
     presets.node(),
-    presets.react({ version: '18.0' })
+    presets.react({ version: '18.0' }),
+    presets.imports({ sort: { newline: true } })
   ],
   extend: {
     plugins: ['@typescript-eslint', 'perfectionist'],
