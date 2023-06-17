@@ -1,5 +1,9 @@
 # Тестовое задание для поступления в FrontCloudCamp ⚡️
 
+<div style="margin-bottom: 25px;">
+  <img src="./public/logo.svg" width="560px" align="center" alt="Cloud.ru logo" style="max-width: 100%;" />
+</div>
+
 Требуется разработать форму отправки данных по готовому [макету](https://www.figma.com/file/rzIp6awR6dGFVrcxcCEwzD/Untitled?type=design&node-id=0-1&t=90NCIZwzg7SIsdMb-0).
 
 ## Оглавление
