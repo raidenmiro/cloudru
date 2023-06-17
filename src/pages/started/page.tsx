@@ -17,15 +17,15 @@ import s from './index.module.css'
 import { startedForm } from './schema'
 
 /**
- *
- * because we use custom error message in react-hook-form we need to use `noValidate`
+ * because we use custom error message in react-hook-form we need to use `noValidate` attribute
+ * @see https://doka.guide/html/novalidate/
  */
 export const Started = () => {
   const { watch, setValue, register, formState } = useForm({
     resolver: yupResolver(startedForm)
   })
 
-  usePersistForm('started', { setValue, watch })
+  usePersistForm('started', { setValue, watch }) // sync with localStorage
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -65,26 +65,24 @@ export const Started = () => {
   )
 }
 
-const Socials = () => {
-  return (
-    <ul className={s.socials}>
-      {data.map((item) => (
-        <li key={item.id}>
-          <Icon path="sprite/folder" />
-          <a href={item.link} target="_blank" rel="noreferrer">
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
+const Socials = () => (
+  <ul className={s.socials}>
+    {data.map((item) => (
+      <li key={item.id}>
+        <Icon path="sprite/folder" />
+        <a href={item.link} target="_blank" rel="noreferrer">
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+)
 
-const PhoneInput = forwardRef<
-  HTMLInputElement,
-  ComponentPropsWithoutRef<'input'>
->((props, ref) => {
+type InputProps = ComponentPropsWithoutRef<'input'>
+
+const PhoneInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const [value, setValue] = useState('')
+
   return (
     <FormattedInput
       ref={ref}
