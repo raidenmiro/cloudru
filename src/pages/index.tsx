@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { router } from './router'
-import { SignUpPage } from './signup/page'
-import { Started } from './started/page'
+import { SignUpPage } from './multi-step-form/page'
+import { Started } from './startup-screen/page'
 
 export const Page = () => {
   const [route, setRoute] = useState('/')
