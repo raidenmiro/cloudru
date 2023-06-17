@@ -1,5 +1,7 @@
 /* eslint-disable no-bitwise */
 
+import { useEffect, useState } from 'react'
+
 /**
  * build from path string RegExp route
  */
@@ -37,21 +39,21 @@ export const createRouter = (routes: Record<string, () => string>) => {
   }
 
   const listener = () => {
-    let parsed = parse(window.location.pathname)
+    const parsed = parse(window.location.pathname)
 
-    if (!parsed) {
-      parsed = window.location.pathname
+    if (parsed) {
+      notify(parsed)
     }
-
-    notify(parsed)
   }
 
   return {
-    back() {
-      history.back()
-    },
     go(path: string) {
       history.pushState(null, '', path)
+
+      const parsedPathname = parse(path)
+      if (parsedPathname) {
+        notify(parsedPathname)
+      }
     },
     listen(cb: (path: string) => void) {
       const currentPathname = window.location.pathname
@@ -74,4 +76,17 @@ export const createRouter = (routes: Record<string, () => string>) => {
       }
     }
   }
+}
+
+export function useRouter(router: ReturnType<typeof createRouter>) {
+  const [route, setRoute] = useState('/')
+
+  useEffect(() => {
+    const unsub = router.listen((path) => {
+      setRoute(path)
+    })
+    return () => unsub()
+  }, [router])
+
+  return route
 }

@@ -1,9 +1,10 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
-import type { ComponentPropsWithoutRef, FormEvent } from 'react'
+import type { ComponentPropsWithoutRef } from 'react'
 import { forwardRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { sendForm } from '@/shared/api'
 import { FormattedInput } from '@/shared/lib/formatinput'
 import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
 import { Avatar } from '@/shared/view/avatar'
@@ -11,7 +12,7 @@ import { Button } from '@/shared/view/button'
 import { Icon } from '@/shared/view/icon'
 import { Input } from '@/shared/view/input'
 
-import { router } from '../router'
+import { paths, router } from '../router'
 import { data } from './data'
 import s from './index.module.css'
 import { startedForm } from './schema'
@@ -20,17 +21,18 @@ import { startedForm } from './schema'
  * because we use custom error message in react-hook-form we need to use `noValidate` attribute
  * @see https://doka.guide/html/novalidate/
  */
-export const Started = () => {
-  const { formState, register, setValue, watch } = useForm({
+export const StartupScreen = () => {
+  const { formState, handleSubmit, register, setValue, watch } = useForm({
     resolver: yupResolver(startedForm)
   })
 
   usePersistForm('started', { setValue, watch }) // sync with localStorage
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    router.go('/started')
-  }
+  const onSubmit = handleSubmit((data) => {
+    sendForm(data).then(() => {
+      router.go(paths.stepFormsScreen())
+    })
+  })
 
   return (
     <section className={s.card}>
@@ -42,7 +44,7 @@ export const Started = () => {
         </div>
       </header>
       <main className={s.main}>
-        <form className={s.form} noValidate onSubmit={handleSubmit}>
+        <form className={s.form} noValidate onSubmit={onSubmit}>
           <PhoneInput
             {...register('phone')}
             aria-invalid={Boolean(formState.errors.phone)}

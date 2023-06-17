@@ -1,22 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useRouter } from '@/shared/lib/router/build-routes'
 
+import { StepFormScreen } from './multi-step-form/page'
 import { router } from './router'
-import { SignUpPage } from './multi-step-form/page'
-import { Started } from './startup-screen/page'
+import { StartupScreen } from './startup-screen/page'
 
 export const Page = () => {
-  const [route, setRoute] = useState('/')
+  const route = useRouter(router)
 
-  useEffect(() => {
-    const unsub = router.listen((path) => {
-      setRoute(path)
-    })
-    return () => unsub()
-  }, [])
-
-  if (route === 'started') {
-    return <Started />
+  if (route === 'stepFormsScreen') {
+    return <StepFormScreen />
   }
 
-  return <SignUpPage />
+  return <StartupScreen />
 }

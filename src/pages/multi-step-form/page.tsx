@@ -5,7 +5,7 @@ import { AboutMe } from './step/aboutme'
 import { Advantages } from './step/advantages'
 import { Bio } from './step/bio'
 
-export const SignUpPage = () => {
+export const StepFormScreen = () => {
   return (
     <StepForm>
       <Stepper.Step description="Biography">

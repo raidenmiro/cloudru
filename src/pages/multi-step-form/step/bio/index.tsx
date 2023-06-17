@@ -2,7 +2,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
-import { router } from '@/pages/router'
+import { sendForm } from '@/shared/api'
 import { useLayoutProps } from '@/shared/layouts/stepform/context'
 import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
 import { Button } from '@/shared/view/button'
@@ -21,12 +21,14 @@ export const Bio = () => {
 
   usePersistForm('bio', { setValue, watch })
 
-  const submit = () => {
-    nextPage()
-  }
+  const onSubmit = handleSubmit((data) => {
+    sendForm(data).then(() => {
+      nextPage()
+    })
+  })
 
   return (
-    <form className={s.paper} onSubmit={handleSubmit(submit)}>
+    <form className={s.paper} onSubmit={onSubmit}>
       <FieldControl>
         <Input
           {...register('nickname')}
@@ -69,7 +71,7 @@ export const Bio = () => {
       </FieldControl>
 
       <footer className={s.footer}>
-        <Button kind="outline" onClick={() => router.go('/')} type="button">
+        <Button kind="outline" onClick={() => history.back()} type="button">
           Назад
         </Button>
         <Button>Далее</Button>
