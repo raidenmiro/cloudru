@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import { useEffect } from 'react'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+
 import { CssTransition } from '../csstransition'
 import s from './backdrop.module.css'
 
@@ -27,8 +27,8 @@ export function Backdrop({ children, onPress, open }: BackdropProps) {
   }, [onPress])
 
   return (
-    <CssTransition name={s.paper} visible={open} clearTime={300}>
-      <div ref={overlayRef} className={s.backdrop}>
+    <CssTransition clearTime={300} name={s.paper} visible={open}>
+      <div className={s.backdrop} ref={overlayRef}>
         <div className={s.layer} />
         <div className={s.position}>{children}</div>
       </div>

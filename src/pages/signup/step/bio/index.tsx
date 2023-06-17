@@ -1,20 +1,22 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+
+import { router } from '@/pages/router'
+import { useLayoutProps } from '@/shared/layouts/stepform/context'
+import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
+import { Button } from '@/shared/view/button'
 import { Input } from '@/shared/view/input'
 
 import s from './index.module.css'
-import { ChoiceGender } from './ui/choice-gender'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { bioSchema } from './schema'
-import { Button } from '@/shared/view/button'
-import { useLayoutProps } from '@/shared/layouts/stepform/context'
-import { router } from '@/pages/router'
-import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
+import { ChoiceGender } from './ui/choice-gender'
+import { FieldControl } from './ui/field'
 
 export const Bio = () => {
   const { nextPage } = useLayoutProps()
-  const { watch, setValue, register, handleSubmit } = useForm({
-    resolver: yupResolver(bioSchema),
-    mode: 'onChange'
+  const { formState, handleSubmit, register, setValue, watch } = useForm({
+    resolver: yupResolver(bioSchema)
   })
 
   usePersistForm('bio', { setValue, watch })
@@ -25,30 +27,49 @@ export const Bio = () => {
 
   return (
     <form className={s.paper} onSubmit={handleSubmit(submit)}>
-      <Input
-        {...register('nickname')}
-        placeholder="placeholder"
-        className={s.input}
-        label="Nickname"
-        variant="secondary"
-      />
-      <Input
-        {...register('name')}
-        placeholder="placeholder"
-        className={s.input}
-        label="Name"
-        variant="secondary"
-      />
-      <Input
-        {...register('surname')}
-        placeholder="placeholder"
-        className={s.input}
-        label="Surname"
-        variant="secondary"
-      />
-      <ChoiceGender />
+      <FieldControl>
+        <Input
+          {...register('nickname')}
+          aria-invalid={Boolean(formState.errors.nickname)}
+          className={s.input}
+          label="Nickname"
+          placeholder="placeholder"
+          variant="secondary"
+        />
+        <ErrorMessage errors={formState.errors} name="nickname" />
+      </FieldControl>
+
+      <FieldControl>
+        <Input
+          {...register('name')}
+          aria-invalid={Boolean(formState.errors.name)}
+          className={s.input}
+          label="Name"
+          placeholder="placeholder"
+          variant="secondary"
+        />
+        <ErrorMessage errors={formState.errors} name="name" />
+      </FieldControl>
+
+      <FieldControl>
+        <Input
+          {...register('surname')}
+          aria-invalid={Boolean(formState.errors.surname)}
+          className={s.input}
+          label="Surname"
+          placeholder="placeholder"
+          variant="secondary"
+        />
+        <ErrorMessage errors={formState.errors} name="surname" />
+      </FieldControl>
+
+      <FieldControl>
+        <ChoiceGender />
+        <ErrorMessage errors={formState.errors} name="sex" />
+      </FieldControl>
+
       <footer className={s.footer}>
-        <Button kind="outline" type="button" onClick={() => router.go('/')}>
+        <Button kind="outline" onClick={() => router.go('/')} type="button">
           Назад
         </Button>
         <Button>Далее</Button>

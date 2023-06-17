@@ -1,20 +1,16 @@
+/* eslint-disable perfectionist/sort-jsx-props */
 import { useFieldArray, useForm } from 'react-hook-form'
-import s from './index.module.css'
-import { Input } from '@/shared/view/input'
-import { Icon } from '@/shared/view/icon'
+
 import { Button } from '@/shared/view/button'
+import { Icon } from '@/shared/view/icon'
+import { Input } from '@/shared/view/input'
 
-const nextId = () => {
-  let id = 0
-  return () => ++id
-}
-
-const id = nextId()
+import s from './index.module.css'
 
 export function AdvantagesFields() {
-  const { register, control } = useForm()
+  const { control, register } = useForm()
 
-  const { fields, append, remove } = useFieldArray({
+  const { append, fields } = useFieldArray({
     control,
     name: 'field-advantages'
   })
@@ -24,13 +20,13 @@ export function AdvantagesFields() {
       {fields.map((field, index) => (
         <div key={field.id} className={s.field}>
           <Input
-            label=""
-            variant="secondary"
-            paperClassName={s.input}
             id={`field-advantages-${index}`}
+            label=""
+            paperClassName={s.input}
+            variant="secondary"
             {...register(`'field-advantages-${index}`)}
           />
-          <button type="button" className={s.control}>
+          <button className={s.control} type="button">
             <Icon path="sprite/trash" />
           </button>
         </div>

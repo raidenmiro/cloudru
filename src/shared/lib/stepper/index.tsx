@@ -11,7 +11,7 @@ interface RootProps {
   page: number
 }
 
-const Root = ({ page, children, onPageChanged, className }: RootProps) => {
+const Root = ({ children, className, onPageChanged, page }: RootProps) => {
   const arrifyChildren = Children.toArray(children) as ReactElement[]
 
   const steps = arrifyChildren.filter((step) => step.type === Step)
@@ -24,10 +24,10 @@ const Root = ({ page, children, onPageChanged, className }: RootProps) => {
         {Array.from({ length: steps.length }, (_, index) => (
           <Fragment key={index}>
             <Indicator
-              onPressed={() => onPageChanged(index + 1)}
-              label={steps[index].props.label}
               isActive={index === currentIndex}
               isCompleted={index < currentIndex}
+              label={steps[index].props.label}
+              onPressed={() => onPageChanged(index + 1)}
             />
             {index < steps.length - 1 && (
               <Divider isFinished={index < currentIndex} />
@@ -41,24 +41,24 @@ const Root = ({ page, children, onPageChanged, className }: RootProps) => {
 }
 
 const Indicator = ({
-  label,
   isActive,
   isCompleted,
+  label,
   onPressed
 }: {
-  label: string
   isActive: boolean
   isCompleted: boolean
+  label: string
   onPressed(): void
 }) => {
   return (
     <button
-      onClick={onPressed}
       className={cc([
         s.step_item,
         isActive && s.is_active,
         isCompleted && s.is_completed
-      ])}>
+      ])}
+      onClick={onPressed}>
       <div className={s.step_label}>{label}</div>
     </button>
   )

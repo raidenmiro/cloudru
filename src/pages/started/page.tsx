@@ -21,7 +21,7 @@ import { startedForm } from './schema'
  * @see https://doka.guide/html/novalidate/
  */
 export const Started = () => {
-  const { watch, setValue, register, formState } = useForm({
+  const { formState, register, setValue, watch } = useForm({
     resolver: yupResolver(startedForm)
   })
 
@@ -42,21 +42,21 @@ export const Started = () => {
         </div>
       </header>
       <main className={s.main}>
-        <form className={s.form} onSubmit={handleSubmit} noValidate>
+        <form className={s.form} noValidate onSubmit={handleSubmit}>
           <PhoneInput
             {...register('phone')}
             aria-invalid={Boolean(formState.errors.phone)}
           />
           <ErrorMessage errors={formState.errors} name="phone" />
           <Input
-            type="email"
-            label="Email"
             aria-invalid={Boolean(formState.errors.email)}
+            label="Email"
             placeholder="tim.jennings@example.com"
+            type="email"
             {...register('email')}
           />
           <ErrorMessage errors={formState.errors} name="email" />
-          <Button type="submit" kind="filled">
+          <Button kind="filled" type="submit">
             Начать
           </Button>
         </form>
@@ -70,7 +70,7 @@ const Socials = () => (
     {data.map((item) => (
       <li key={item.id}>
         <Icon path="sprite/folder" />
-        <a href={item.link} target="_blank" rel="noreferrer">
+        <a href={item.link} rel="noreferrer" target="_blank">
           {item.label}
         </a>
       </li>
@@ -87,12 +87,12 @@ const PhoneInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     <FormattedInput
       ref={ref}
       {...props}
-      name="phone"
       label="Номер телефона"
-      placeholder="+7 (999) 999 99 99"
       mask="+# (###) ### ## ##"
-      value={value}
+      name="phone"
       onChangeValue={setValue}
+      placeholder="+7 (999) 999 99 99"
+      value={value}
     />
   )
 })

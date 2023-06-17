@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { cloneElement, isValidElement } from 'react'
-import { useEffect, useState } from 'react'
+import { cloneElement, isValidElement, useEffect, useState } from 'react'
 
 // simplify implementation
 
@@ -14,12 +13,12 @@ interface Props {
 }
 
 const defaultProps = {
-  visible: false,
+  className: '',
+  clearTime: 60,
   enterTime: 60,
   leaveTime: 60,
-  clearTime: 60,
-  className: '',
-  name: 'transition'
+  name: 'transition',
+  visible: false
 }
 
 export type CssTransitionProps = Props
@@ -27,11 +26,11 @@ export type CssTransitionProps = Props
 export const CssTransition = ({
   children,
   className,
-  visible,
+  clearTime,
   enterTime,
   leaveTime,
-  clearTime,
   name,
+  visible,
   ...props
 }: PropsWithChildren<CssTransitionProps> & typeof defaultProps) => {
   const [classes, setClasses] = useState<string>('')

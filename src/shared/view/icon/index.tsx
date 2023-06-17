@@ -14,31 +14,31 @@ export interface IconProps
 }
 
 export function Icon({
-  path,
   className,
-  viewBox,
   height,
+  path,
+  viewBox,
   width,
   ...props
 }: IconProps) {
   const [spriteName, iconName] = path.split('/')
 
   const styles = {
-    userSelect: 'none',
-    fill: 'currentColor',
     display: 'inline-block',
+    fill: 'currentColor',
     font: 'inherit',
-    width: `${width}px`,
-    height: `${height}px`
+    height: `${height}px`,
+    userSelect: 'none',
+    width: `${width}px`
   } satisfies CSSProperties
 
   return (
     <svg
-      style={styles}
-      className={className}
-      viewBox={viewBox}
-      focusable="false"
       aria-hidden
+      className={className}
+      focusable="false"
+      style={styles}
+      viewBox={viewBox}
       {...props}>
       <use xlinkHref={`/sprite/${spriteName}.svg#${iconName}`} />
     </svg>

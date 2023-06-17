@@ -3,10 +3,10 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { useEffect, useId, useRef, useState } from 'react'
 
 import { usePrevious } from '@/shared/lib/hooks/use-previos'
+import { amountOfChars } from '@/shared/lib/string'
 
 import s from './index.module.css'
 import { adjustHeight } from './lib'
-import { amountOfChars } from '@/shared/lib/string'
 
 type BaseProps = ComponentPropsWithoutRef<'textarea'>
 
@@ -18,8 +18,8 @@ export interface TextareaProps extends BaseProps {
 
 export const TextArea = ({
   className,
-  maxHeight = '500px',
   label,
+  maxHeight = '500px',
   ...props
 }: TextareaProps) => {
   const [value, setInput] = useState('')
@@ -44,10 +44,10 @@ export const TextArea = ({
       <textarea
         ref={ref}
         {...props}
-        id={a11yId}
-        value={value}
         className={cc([s.textarea, className])}
+        id={a11yId}
         onChange={(e) => setInput(e.target.value)}
+        value={value}
       />
       <div className={s.footer}>
         <span>Tip</span>

@@ -23,17 +23,17 @@ const Container = ({ children, className }: StepFormProps) => {
   const { page } = useLayoutProps()
 
   return (
-    <div data-step={page} className={cc([s.container, className])}>
+    <div className={cc([s.container, className])} data-step={page}>
       <Content>{children}</Content>
     </div>
   )
 }
 
 const Content = ({ children }: Pick<StepFormProps, 'children'>) => {
-  const { page, choiceStep } = useLayoutProps()
+  const { choiceStep, page } = useLayoutProps()
 
   return (
-    <Stepper page={page} onPageChanged={choiceStep} className={s.content}>
+    <Stepper className={s.content} onPageChanged={choiceStep} page={page}>
       {children}
     </Stepper>
   )

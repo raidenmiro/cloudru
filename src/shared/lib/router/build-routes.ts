@@ -1,8 +1,7 @@
+/* eslint-disable no-bitwise */
+
 /**
- * build from string RegExp route match
- *
- * @param value string
- * @returns RegExp
+ * build from path string RegExp route
  */
 export const createPattern = (value: string) => {
   const pattern = value
@@ -14,22 +13,19 @@ export const createPattern = (value: string) => {
 }
 
 /**
- * simplify match routes observer
- *
- * @param routes - Record of route name and function that returns route path
+ *  match routes observer
  */
 export const createRouter = (routes: Record<string, () => string>) => {
   const keys = Object.keys(routes)
-  const matcher: Array<{ name: string; match: RegExp }> = []
+  const matcher: Array<{ match: RegExp; name: string }> = []
   const listeners: Array<(path: string) => void> = []
 
   for (const key of keys) {
-    matcher.push({ name: key, match: createPattern(routes[key]()) })
+    matcher.push({ match: createPattern(routes[key]()), name: key })
   }
 
-  let current: string
   const parse = (path: string) => {
-    for (const { name, match } of matcher) {
+    for (const { match, name } of matcher) {
       if (match.test(path)) {
         return name
       }
@@ -37,24 +33,25 @@ export const createRouter = (routes: Record<string, () => string>) => {
   }
 
   const notify = (path: string) => {
-    current = path
     listeners.forEach((cb) => cb(path))
   }
 
-  const listener = (_: PopStateEvent) => {
+  const listener = () => {
     let parsed = parse(window.location.pathname)
 
     if (!parsed) {
       parsed = window.location.pathname
     }
 
-    current = parsed
-    notify(current)
+    notify(parsed)
   }
 
   return {
-    get() {
-      return current
+    back() {
+      history.back()
+    },
+    go(path: string) {
+      history.pushState(null, '', path)
     },
     listen(cb: (path: string) => void) {
       const currentPathname = window.location.pathname
@@ -63,22 +60,18 @@ export const createRouter = (routes: Record<string, () => string>) => {
       listeners.push(cb)
 
       if (parsedPathname) {
-        current = parsedPathname
-        cb(current)
+        cb(parsedPathname)
       }
 
       window.addEventListener('popstate', listener)
       return () => {
         window.removeEventListener('popstate', listener)
-        listeners.length = 0
+
+        const idx = listeners.indexOf(cb)
+        if (~idx) {
+          listeners.splice(idx, 1)
+        }
       }
-    },
-    go(path: string) {
-      history.pushState(null, '', path)
-      notify(path)
-    },
-    back() {
-      history.back()
     }
   }
 }

@@ -46,10 +46,10 @@ export const StepFormProvider = ({ children }: { children: ReactNode }) => {
 
   const state = useMemo(() => {
     return {
-      page,
+      choiceStep,
       nextPage,
-      prevPage,
-      choiceStep
+      page,
+      prevPage
     }
   }, [choiceStep, nextPage, page, prevPage])
 

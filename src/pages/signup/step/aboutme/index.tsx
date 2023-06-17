@@ -1,8 +1,10 @@
+import { useCallback, useState } from 'react'
+
 import { Button } from '@/shared/view/button'
 import { TextArea } from '@/shared/view/textarea'
-import s from './index.module.css'
+
 import { FinallyModal } from './finally'
-import { useCallback, useState } from 'react'
+import s from './index.module.css'
 
 export const AboutMe = () => {
   const [open, setOpen] = useState(false)
@@ -20,7 +22,7 @@ export const AboutMe = () => {
         </Button>
         <Button onClick={() => setOpen(true)}>Отправить</Button>
       </footer>
-      <FinallyModal open={open} onHide={hide} type="fail" />
+      <FinallyModal onHide={hide} open={open} type="fail" />
     </form>
   )
 }

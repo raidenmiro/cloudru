@@ -9,20 +9,20 @@ import s from './index.module.css'
 
 const Result = {
   fail: {
-    content: 'sprite/failure',
-    title: 'Ошибка',
     action: {
-      text: 'Закрыть',
-      onPress: (onClose?: () => void) => onClose?.()
-    }
+      onPress: (onClose?: () => void) => onClose?.(),
+      text: 'Закрыть'
+    },
+    content: 'sprite/failure',
+    title: 'Ошибка'
   },
   success: {
-    content: 'sprite/success',
-    title: 'Форма успешно отправлена',
     action: {
-      text: 'На главную',
-      onPress: () => router.go('/')
-    }
+      onPress: () => router.go('/'),
+      text: 'На главную'
+    },
+    content: 'sprite/success',
+    title: 'Форма успешно отправлена'
   }
 } as const
 
@@ -32,16 +32,16 @@ interface FinallyModalProps {
   type: keyof typeof Result
 }
 
-export const FinallyModal = ({ open, type, onHide }: FinallyModalProps) => {
+export const FinallyModal = ({ onHide, open, type }: FinallyModalProps) => {
   const { action, content, title } = Result[type]
 
   return (
     <Modal
-      open={open}
-      onHide={onHide}
-      title="Completed"
       className={s.modal}
-      description="Check your data">
+      description="Check your data"
+      onHide={onHide}
+      open={open}
+      title="Completed">
       <header className={cc([s.header, type === 'success' && s.is_success])}>
         <h2>{title}</h2>
         <button className={s.close} data-type={type}>
@@ -49,11 +49,11 @@ export const FinallyModal = ({ open, type, onHide }: FinallyModalProps) => {
         </button>
       </header>
       <div className={s.content}>
-        <span data-type={type} className={s.icon_wrapper}>
-          <Icon path={content} className={s.indicator} />
+        <span className={s.icon_wrapper} data-type={type}>
+          <Icon className={s.indicator} path={content} />
         </span>
       </div>
-      <footer data-type={type} className={cc([s.footer])}>
+      <footer className={cc([s.footer])} data-type={type}>
         <Button onClick={() => action.onPress(onHide)}>{action.text}</Button>
       </footer>
     </Modal>

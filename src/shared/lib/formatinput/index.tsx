@@ -5,14 +5,12 @@ import type {
   KeyboardEvent,
   MouseEvent
 } from 'react'
-import { forwardRef } from 'react'
-import { useId } from 'react'
-import { useCallback, useEffect, useRef } from 'react'
+import { forwardRef, useCallback, useEffect, useId, useRef } from 'react'
 
 import { Input } from '@/shared/view/input'
 
-import s from './index.module.css'
 import { mergeRefs } from '../merge-refs'
+import s from './index.module.css'
 
 type BaseProps = Omit<
   ComponentPropsWithoutRef<'input'>,
@@ -105,12 +103,12 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
   (
     {
       label,
-      value,
       mask,
-      placeholder,
+      name,
       onChange,
       onChangeValue,
-      name,
+      placeholder,
+      value,
       ...props
     },
     forwardedRef
@@ -241,25 +239,25 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
       <div>
         <div className={s.container}>
           <Input
-            label={label}
-            tabIndex={-1}
             className={s.input}
+            label={label}
+            onChange={NOOP}
+            tabIndex={-1}
             value={formattedValue.concat(
               placeholder.slice(formattedValue.length)
             )}
-            onChange={NOOP}
           />
           <div className={s.hidden}>
             <Input
-              label=""
               id={id}
-              ref={mergeRefs(ref, forwardedRef)}
+              label=""
               name={name}
-              value={formattedValue}
+              onChange={onChange}
               onInput={handleInput}
               onKeyDown={handleKeyDown}
               onMouseDown={handleMouseDown}
-              onChange={onChange}
+              ref={mergeRefs(ref, forwardedRef)}
+              value={formattedValue}
               {...props}
             />
           </div>

@@ -9,12 +9,12 @@ export interface AvatarProps {
 }
 
 enum LoadingStatus {
+  Error = 'error',
   Idle = 'Idle',
-  Pending = 'pending',
-  Error = 'error'
+  Pending = 'pending'
 }
 
-export const Avatar = ({ src = '', alt, fallback }: AvatarProps) => {
+export const Avatar = ({ alt, fallback, src = '' }: AvatarProps) => {
   const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Idle)
   const mounted = useRef(false)
 
@@ -49,7 +49,7 @@ export const Avatar = ({ src = '', alt, fallback }: AvatarProps) => {
       {status === LoadingStatus.Error ? (
         <span className={s.is_fallback}>{prefix}</span>
       ) : (
-        <img src={src} alt={alt} />
+        <img alt={alt} src={src} />
       )}
     </span>
   )

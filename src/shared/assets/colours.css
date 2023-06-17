@@ -5,7 +5,9 @@
   --surface-divider: oklch(0% 0 0 / 8%);
   --surface-regular: oklch(91.34% 0.031 254.32);
   --failure: oklch(57.35% 0.154 29.65 / 15%);
+  --failure-faded: oklch(57.35% 0.154 29.65);
   --success: oklch(57.35% 0.144 146.12 / 15%);
+  --success-faded: oklch(57.35% 0.144 146.12);
   --surface-border: oklch(0% 0 0 / 16%);
   --surface-overlay: oklch(0% 0 0 / 16%);
   --surface-shadow: oklch(56.04% 0.235 274.96 / 15%);

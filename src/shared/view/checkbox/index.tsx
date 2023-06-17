@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react'
+
 import s from './index.module.css'
 
 export interface CheckboxProps extends ComponentPropsWithoutRef<'input'> {
@@ -8,7 +9,7 @@ export interface CheckboxProps extends ComponentPropsWithoutRef<'input'> {
 export const Checkbox = ({ label, ...props }: CheckboxProps) => {
   return (
     <label className={s.paper}>
-      <input {...props} type="checkbox" className={s.checkbox} />
+      <input {...props} className={s.checkbox} type="checkbox" />
       <span aria-hidden className={s.label} />
       <span>{label}</span>
     </label>

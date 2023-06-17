@@ -14,10 +14,10 @@ const SelectValue = SelectPrimitive.Value
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+>(({ children, className, ...props }, ref) => (
   <SelectPrimitive.Trigger
-    ref={ref}
     className={cc([className, s.trigger])}
+    ref={ref}
     {...props}>
     {children}
     <SelectPrimitive.Icon asChild>
@@ -30,12 +30,12 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = 'popper', ...props }, ref) => (
+>(({ children, className, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
-      ref={ref}
       className={cc([s.content, className])}
       position={position}
+      ref={ref}
       {...props}>
       <SelectPrimitive.Viewport
         className={cc([s.viewport, position === 'popper' && s.is_popover])}>
@@ -51,8 +51,8 @@ const SelectLabel = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
-    ref={ref}
     className={cc([s.label, className])}
+    ref={ref}
     {...props}
   />
 ))
@@ -61,10 +61,10 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
+>(({ children, className, ...props }, ref) => (
   <SelectPrimitive.Item
-    ref={ref}
     className={cc([s.item, className])}
+    ref={ref}
     {...props}>
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>

@@ -4,8 +4,8 @@ const BASE_URL = 'https://api.sbercloud.ru/content/v1/bootcamp/frontend'
 
 export function sendInformation(form: FormData) {
   return request({
-    path: BASE_URL,
+    body: form,
     method: 'POST',
-    body: form
+    path: BASE_URL
   })
 }

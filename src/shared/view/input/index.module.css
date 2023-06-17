@@ -18,7 +18,7 @@
   }
 
   &[aria-invalid='true'] {
-    border-color: var(--failure);
+    outline-color: var(--failure-faded);
   }
 
   &[data-size='M'] {

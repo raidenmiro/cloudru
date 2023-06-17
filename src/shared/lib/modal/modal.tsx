@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+
 import { useHotkey } from '../hooks/use-hotkey'
 import { Backdrop } from './backdrop'
-import type { ReactNode } from 'react'
 
 const getRoot = () => document.querySelector('modal-root') ?? document.body
 
@@ -15,12 +16,12 @@ export interface ModalProps {
 }
 
 export const Modal = ({
-  open,
-  onHide,
   children,
-  title,
   className,
-  description
+  description,
+  onHide,
+  open,
+  title
 }: ModalProps) => {
   useHotkey({ Escape: () => onHide() })
 
@@ -29,7 +30,7 @@ export const Modal = ({
   }
 
   return createPortal(
-    <Backdrop open={open} onPress={onHide}>
+    <Backdrop onPress={onHide} open={open}>
       <div className={className} {...getA11y(title, description)}>
         {children}
       </div>
@@ -40,9 +41,9 @@ export const Modal = ({
 
 function getA11y(title: string, description: string) {
   return {
-    'role': 'dialog',
-    'aria-modal': true,
+    'aria-describedby': description,
     'aria-labelledby': title,
-    'aria-describedby': description
+    'aria-modal': true,
+    'role': 'dialog'
   }
 }

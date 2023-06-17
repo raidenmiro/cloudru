@@ -7,8 +7,8 @@ export interface Request {
 }
 
 export const request = async <Done = unknown>({
-  path,
   method = 'GET',
+  path,
   ...config
 }: Request): Promise<Done> => {
   const body = config.body ? JSON.stringify(config.body) : undefined
@@ -17,8 +17,8 @@ export const request = async <Done = unknown>({
   const url = path.concat(query ? `?${query}` : '')
 
   const answer = await fetch(url, {
-    method,
-    body
+    body,
+    method
   })
 
   if (!answer.ok) {

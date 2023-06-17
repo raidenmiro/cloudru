@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+
+import { router } from './router'
 import { SignUpPage } from './signup/page'
 import { Started } from './started/page'
-import { router } from './router'
 
 export const Page = () => {
   const [route, setRoute] = useState('/')

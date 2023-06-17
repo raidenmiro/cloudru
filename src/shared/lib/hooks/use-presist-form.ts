@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react'
-import { LS } from '../storage'
 import type { SetFieldValue, UseFormWatch } from 'react-hook-form'
+
 import { debounce } from '../debounce'
+import { LS } from '../storage'
 
 export function usePersistForm<TData extends Record<string, any>>(
   key: string,
   opts: {
-    watch: UseFormWatch<TData>
     setValue: SetFieldValue<TData>
+    watch: UseFormWatch<TData>
   }
 ) {
   const { setValue, watch } = opts
@@ -22,9 +23,9 @@ export function usePersistForm<TData extends Record<string, any>>(
       Object.keys(values).forEach((key) => {
         if (typeof values === 'object' && key in values) {
           setValue(key, values[key], {
-            shouldValidate: false,
             shouldDirty: false,
-            shouldTouch: false
+            shouldTouch: false,
+            shouldValidate: false
           })
         }
       })

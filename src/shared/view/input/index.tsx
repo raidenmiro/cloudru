@@ -18,15 +18,15 @@ export interface InputProps extends BaseInput {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      className,
       label,
-      prefix,
-      postfix,
       onChange,
+      onValueChanged,
+      paperClassName,
+      postfix,
+      prefix,
       size = 'L',
       variant = 'primary',
-      onValueChanged,
-      className,
-      paperClassName,
       ...props
     },
     ref
@@ -43,12 +43,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <label htmlFor={a11yId}>{label}</label>
         <input
           {...props}
-          ref={ref}
-          id={a11yId}
           className={cc([s.input, className])}
           data-size={size}
           data-variant={variant}
+          id={a11yId}
           onChange={handleChange}
+          ref={ref}
         />
       </div>
     )
