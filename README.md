@@ -85,3 +85,4 @@ pnpm test
 
 1. Статья про [oklch](https://web-standards.ru/articles/oklch-in-css-why-quit-rgb-hsl/)
 2. Структура - <https://feature-sliced.design>
+3. Css media queries - <https://drafts.csswg.org/mediaqueries/#mq-range-context>
