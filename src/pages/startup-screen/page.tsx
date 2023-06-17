@@ -37,7 +37,7 @@ export const Started = () => {
       <header className={s.header}>
         <Avatar fallback="RK" />
         <div className={s.details}>
-          <span>Robert Kuzhin</span>
+          <span>Роберт Кужин</span>
           <Socials />
         </div>
       </header>
