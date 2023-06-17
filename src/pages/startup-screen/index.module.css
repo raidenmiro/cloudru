@@ -43,30 +43,6 @@ body {
   }
 }
 
-.socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: center;
-  
-  & svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  & li {
-    display: flex;
-    gap: 3px;
-    align-items: center;
-    list-style: none;
-  }
-
-  & a {
-    color: var(--text-link);
-    text-decoration: none;
-  }
-}
-
 .main {
   max-width: 400px;
 }
