@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { router } from '@/pages/router'
 import { useLayoutProps } from '@/shared/layouts/stepform/context'
-import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
+import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
 import { Button } from '@/shared/view/button'
 import { Input } from '@/shared/view/input'
 

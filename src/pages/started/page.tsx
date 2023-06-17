@@ -5,7 +5,7 @@ import { forwardRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { FormattedInput } from '@/shared/lib/formatinput'
-import { usePersistForm } from '@/shared/lib/hooks/use-presist-form'
+import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
 import { Avatar } from '@/shared/view/avatar'
 import { Button } from '@/shared/view/button'
 import { Icon } from '@/shared/view/icon'
