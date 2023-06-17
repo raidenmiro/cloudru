@@ -6,16 +6,19 @@ type BaseProps = ComponentPropsWithoutRef<'button'>
 export interface ButtonProps extends BaseProps {
   children: ReactNode
   kind?: 'filled' | 'outline'
+  loading?: boolean
 }
 
 export const Button = ({
   children,
   kind = 'filled',
+  loading = false,
   ...props
 }: ButtonProps) => {
   return (
     <button data-kind={kind} {...props} className={s.button}>
-      {children}
+      {loading && <span aria-hidden className={s.spinner} />}
+      {loading ? 'Отправка..' : children}
     </button>
   )
 }
