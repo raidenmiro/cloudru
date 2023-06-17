@@ -63,7 +63,7 @@ CONTAINER ID   IMAGE              COMMAND                   CREATED             
 7e34d10fef75   cloudru_frontend   "nginx -g 'daemon of…"    About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, :::80->80/tcp   frontend
 ```
 
-Перейдем по адресу <http://localhost/>  и увидим запущенное приложение.
+Перейдем по адресу <http://localhost>  и увидим запущенное приложение.
 
 Чтобы остановить запущенный контейнер выполните команду:
 
