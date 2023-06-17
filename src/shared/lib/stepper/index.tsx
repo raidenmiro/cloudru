@@ -40,25 +40,27 @@ const Root = ({ children, className, onPageChanged, page }: RootProps) => {
   )
 }
 
+interface StepIndicatorProps {
+  isActive: boolean
+  isCompleted: boolean
+  label: string
+  onPressed(): void
+}
+
 const Indicator = ({
   isActive,
   isCompleted,
   label,
   onPressed
-}: {
-  isActive: boolean
-  isCompleted: boolean
-  label: string
-  onPressed(): void
-}) => {
+}: StepIndicatorProps) => {
+  const classes = cc([
+    s.step_item,
+    isActive && s.is_active,
+    isCompleted && s.is_completed
+  ])
+
   return (
-    <button
-      className={cc([
-        s.step_item,
-        isActive && s.is_active,
-        isCompleted && s.is_completed
-      ])}
-      onClick={onPressed}>
+    <button className={classes} onClick={onPressed}>
       <div className={s.step_label}>{label}</div>
     </button>
   )
@@ -67,12 +69,11 @@ const Indicator = ({
 interface StepProps {
   children: ReactNode
   description: string
-  label: string
 }
 
-const Step = ({ children }: StepProps) => {
-  return <div>{children}</div>
-}
+const Step = ({ children, description }: StepProps) => (
+  <div aria-label={description}>{children}</div>
+)
 
 const Divider = ({ isFinished }: { isFinished: boolean }) => (
   <div className={cc([s.divider, isFinished && s.is_filled])} />

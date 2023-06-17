@@ -21,7 +21,7 @@
   border: none;
   border-radius: 9999px;
 
-  &.is_completed& {
+  &.is_completed {
     background: var(--accent);
   }
 
