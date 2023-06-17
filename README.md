@@ -20,7 +20,7 @@
 
 ## Запуск
 
-### Запуск без docker
+### Без docker
 
 Для лучшего DX, советую использовать локально [asdf](https://asdf-vm.com) и `pnpm`.
 Он автоматически подтянет нужные версии nodejs и pnpm с файла `.tool-versions`.
@@ -40,7 +40,7 @@ pnpm dev
 
 Дальше перейдите по данному url <http://localhost:5173>, чтобы посмотреть результаты.
 
-### Запуск с docker
+### С помощью docker
 
 Для этого варианта установки, необходим docker. Придерживайтесь ниже перечисленных команд.
 
@@ -83,6 +83,6 @@ pnpm test
 
 ## Дополнения
 
-1. Статья про [oklch](https://web-standards.ru/articles/oklch-in-css-why-quit-rgb-hsl/)
+1. [OKLCH](https://web-standards.ru/articles/oklch-in-css-why-quit-rgb-hsl/) в CSS: по­че­му ушли от RGB и HSL.
 2. Структура - <https://feature-sliced.design>
 3. Css media queries - <https://drafts.csswg.org/mediaqueries/#mq-range-context>
