@@ -8,7 +8,7 @@ import { Icon } from '@/shared/view/icon'
 import s from './index.module.css'
 
 const Result = {
-  fail: {
+  error: {
     action: {
       onPress: (onClose?: () => void) => onClose?.(),
       text: 'Закрыть'
