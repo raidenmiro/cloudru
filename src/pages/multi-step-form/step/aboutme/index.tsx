@@ -15,7 +15,7 @@ export const AboutMe = () => {
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <TextArea label="About" maxHeight={130} maxLength={200} />
+      <TextArea label="About" maxHeight={120} maxLength={200} />
       <footer className={s.footer}>
         <Button kind="outline" type="button">
           Назад
