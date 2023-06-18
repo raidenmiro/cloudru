@@ -17,9 +17,10 @@ import { FieldControl } from './ui/field'
 export const Bio = () => {
   const { nextPage } = useLayoutProps()
   const [loading, setLoading] = useState(false)
-  const { formState, handleSubmit, register, setValue, watch } = useForm({
-    resolver: yupResolver(bioSchema)
-  })
+  const { control, formState, handleSubmit, register, setValue, watch } =
+    useForm({
+      resolver: yupResolver(bioSchema)
+    })
 
   usePersistForm('bio', { setValue, watch })
 
@@ -70,7 +71,11 @@ export const Bio = () => {
       </FieldControl>
 
       <FieldControl>
-        <ChoiceGender />
+        <Controller
+          control={control}
+          name="sex"
+          render={({ field }) => <ChoiceGender {...field} />}
+        />
         <ErrorMessage errors={formState.errors} name="sex" />
       </FieldControl>
 
