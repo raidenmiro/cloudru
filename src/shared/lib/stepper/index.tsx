@@ -39,6 +39,7 @@ const Root = ({ children, className, onPageChanged, page }: RootProps) => {
     </>
   )
 }
+Root.displayName = 'Stepper.Root'
 
 interface StepIndicatorProps {
   isActive: boolean
@@ -65,6 +66,7 @@ const Indicator = ({
     </button>
   )
 }
+Indicator.displayName = 'Stepper.Indicator'
 
 interface StepProps {
   children: ReactNode
@@ -74,9 +76,11 @@ interface StepProps {
 const Step = ({ children, description }: StepProps) => (
   <div aria-label={description}>{children}</div>
 )
+Step.displayName = 'Stepper.Step'
 
 const Divider = ({ isFinished }: { isFinished: boolean }) => (
   <div className={cc([s.divider, isFinished && s.is_filled])} />
 )
+Divider.displayName = 'Stepper.Divider'
 
 export const Stepper = Object.assign(Root, { Step })

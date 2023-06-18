@@ -54,6 +54,7 @@ export const Modal = ({
     getRoot()
   )
 }
+Modal.displayName = 'Modal'
 
 function getA11y(title: string, description: string) {
   return {

@@ -1,2 +1,2 @@
 export const amountOfChars = (s: string) =>
-  s.trim().replace(/\s/g, '').split('').length
+  s.replace(/\s/g, '').split('').length

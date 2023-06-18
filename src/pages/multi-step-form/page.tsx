@@ -20,3 +20,4 @@ export const StepFormScreen = () => {
     </StepForm>
   )
 }
+StepFormScreen.displayName = 'Pages.StepFormScreen'

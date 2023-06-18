@@ -69,3 +69,4 @@ export const StartupScreen = () => {
     </section>
   )
 }
+StartupScreen.displayName = 'Pages.StartupScreen' // for debug

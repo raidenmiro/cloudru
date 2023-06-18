@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * build from path string RegExp route
+ * Создает RegExp из строки (путь)
  */
 export const createPattern = (value: string) => {
   const pattern = value
@@ -15,7 +15,7 @@ export const createPattern = (value: string) => {
 }
 
 /**
- *  match routes observer
+ *  миниатюрная реализация простого роутера с observer
  */
 export const createRouter = (routes: Record<string, () => string>) => {
   const keys = Object.keys(routes)
@@ -70,6 +70,7 @@ export const createRouter = (routes: Record<string, () => string>) => {
         window.removeEventListener('popstate', listener)
 
         const idx = listeners.indexOf(cb)
+        // битовый оператор для превращения -1 в 0
         if (~idx) {
           listeners.splice(idx, 1)
         }
@@ -79,6 +80,7 @@ export const createRouter = (routes: Record<string, () => string>) => {
 }
 
 export function useRouter(router: ReturnType<typeof createRouter>) {
+  // здесь мы могли использовать useSyncWithExternalStore
   const [route, setRoute] = useState('/')
 
   useEffect(() => {

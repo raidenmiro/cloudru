@@ -20,7 +20,7 @@ export const useLayoutProps = () => {
   const context = useContext(StepFormContext)
 
   if (!context) {
-    throw new Error('useLayoutProps must be used within a StepFormProvider')
+    throw new Error('useLayoutProps must be used within a <StepFormProvider />')
   }
 
   return context

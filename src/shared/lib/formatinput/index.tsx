@@ -266,3 +266,4 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
     )
   }
 )
+FormattedInput.displayName = 'FormattedInput'

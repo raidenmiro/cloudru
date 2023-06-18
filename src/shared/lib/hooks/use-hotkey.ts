@@ -13,7 +13,7 @@ export const useHotkey = (config: Record<string, () => void>) => {
   )
 
   useEffect(() => {
-    const target = ref.current ? ref.current : window
+    const target = ref.current ? ref.current : document
 
     target.addEventListener('keydown', listener)
     return () => {
