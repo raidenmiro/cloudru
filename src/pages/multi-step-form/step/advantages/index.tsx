@@ -6,9 +6,8 @@ import { useLayoutProps } from '@/shared/layouts/stepform/context'
 import { Button } from '@/shared/view/button'
 
 import s from './index.module.css'
-import { CheckboxGroup } from './ui/checkbox-group'
-import { AdvantagesFields } from './ui/field-group'
-import { RadioGroup } from './ui/radio-group'
+import { AdvantagesFields } from './ui/advantages-group'
+import { ElementsGroup } from './ui/elements-group'
 
 export const Advantages = () => {
   const { nextPage, prevPage } = useLayoutProps()
@@ -30,13 +29,19 @@ export const Advantages = () => {
       <form className={s.form} onSubmit={onSubmit}>
         <fieldset className={s.fieldset}>
           <legend>Advantages</legend>
-          <RadioGroup />
-          <CheckboxGroup />
-          <AdvantagesFields />
+
+          <div className={s.advantages}>
+            <AdvantagesFields />
+          </div>
+
+          <div className={s.elements}>
+            <ElementsGroup renderVariant="checkbox" />
+            <ElementsGroup renderVariant="radio" />
+          </div>
         </fieldset>
         <footer className={s.footer}>
           <Button kind="outline" onClick={prevPage} type="button">
-            Назад
+            Back
           </Button>
           <Button disabled={loading} loading={loading} type="submit">
             Далее

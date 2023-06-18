@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+  gap: 4px;
+}
+
+.title {
+  font-weight: 400;
+  line-height: 20px;
+}
