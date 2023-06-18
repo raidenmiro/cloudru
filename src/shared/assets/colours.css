@@ -17,4 +17,5 @@
   --text-secondary: oklch(100% 0 0);
   --text-link: var(--accent);
   --text-note: oklch(0% 0 0 / 48%);
+  --text-svg: oklch(84.52% 0 0);
 }

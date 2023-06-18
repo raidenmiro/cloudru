@@ -20,14 +20,16 @@
   border: none;
   border-radius: 8px;
 
-  & svg {
-    width: 27px;
-    height: 27px;
-  }
-
   @media (hover: hover) {
-    &:hover {
-      background: var(--failure-faded);
+    &:hover .icon {
+      color: var(--failure-faded);
     }
   }
+}
+
+.icon {
+  width: 27px;
+  height: 27px;
+  color: var(--text-svg);
+  transition: color 0.2s ease;
 }

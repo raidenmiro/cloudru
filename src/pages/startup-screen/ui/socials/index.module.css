@@ -7,6 +7,7 @@
   & svg {
     width: 16px;
     height: 16px;
+    color: var(--text-svg);
   }
 
   & li {
