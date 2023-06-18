@@ -23,12 +23,14 @@ export const StartupScreen = () => {
 
   usePersistForm('started', { setValue, watch }) // sync with localStorage
 
-  const onSubmit = handleSubmit((data) => {
-    setLoading(true)
-    sendForm(data).then(() => {
-      setLoading(false)
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setLoading(true)
+      await sendForm(data)
       router.go(paths.stepFormsScreen())
-    })
+    } finally {
+      setLoading(false)
+    }
   })
 
   return (

@@ -1,7 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { sendForm } from '@/shared/api'
 import { useLayoutProps } from '@/shared/layouts/stepform/context'
@@ -24,12 +24,14 @@ export const Bio = () => {
 
   usePersistForm('bio', { setValue, watch })
 
-  const onSubmit = handleSubmit((data) => {
-    setLoading(true)
-    sendForm(data).then(() => {
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setLoading(true)
+      await sendForm(data)
       nextPage()
+    } finally {
       setLoading(false)
-    })
+    }
   })
 
   return (
