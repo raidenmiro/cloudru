@@ -6,13 +6,13 @@ import { useLayoutProps } from '@/shared/layouts/stepform/context'
 import { Button } from '@/shared/view/button'
 
 import s from './index.module.css'
-import { AdvantagesFields } from './ui/advantages-group'
+import { AdvantagesFields, genStaticFields } from './ui/advantages-group'
 import { ElementsGroup } from './ui/elements-group'
 
 export const Advantages = () => {
   const { nextPage, prevPage } = useLayoutProps()
   const [loading, setLoading] = useState(false)
-  const methods = useForm()
+  const methods = useForm({ defaultValues: genStaticFields() })
 
   const onSubmit = methods.handleSubmit(async (data) => {
     try {

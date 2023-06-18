@@ -17,7 +17,7 @@ export function AdvantagesFields() {
   })
 
   const addOne = useCallback(() => {
-    append({})
+    append({ field: '' })
   }, [append])
 
   return (
@@ -26,11 +26,10 @@ export function AdvantagesFields() {
         {fields.map((field, index) => (
           <li key={field.id} className={s.field}>
             <Input
-              id={`advantages.${index}.field-advantages-${index}`}
               label=""
               paperClassName={s.input}
               variant="secondary"
-              {...register(`advantages.${index}.field-advantages-${index}`)}
+              {...register(`advantages.${index}.field`)}
             />
             <button
               type="button"
@@ -46,4 +45,10 @@ export function AdvantagesFields() {
       </Button>
     </Fragment>
   )
+}
+
+export function genStaticFields() {
+  return {
+    advantages: Array.from({ length: 3 }, () => ({ field: '' }))
+  }
 }
