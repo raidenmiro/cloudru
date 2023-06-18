@@ -43,6 +43,19 @@
       background-color: var(--accent-faded);
     }
   } 
+
+  &[data-kind='action'] {
+    height: 44px;
+    padding-inline: 13px;
+    color: var(--accent);
+    background: transparent;
+    border: 2px solid var(--accent);
+
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 .spinner {

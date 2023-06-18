@@ -5,7 +5,7 @@ import s from './index.module.css'
 type BaseProps = ComponentPropsWithoutRef<'button'>
 export interface ButtonProps extends BaseProps {
   children: ReactNode
-  kind?: 'filled' | 'outline'
+  kind?: 'filled' | 'outline' | 'action'
   loading?: boolean
 }
 

@@ -40,7 +40,7 @@ export function AdvantagesFields() {
           </li>
         ))}
       </ul>
-      <Button type="button" kind="outline" onClick={addOne}>
+      <Button type="button" kind="action" onClick={addOne}>
         <Icon path="sprite/plus" />
       </Button>
     </Fragment>
