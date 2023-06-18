@@ -35,7 +35,9 @@ const Root = ({ children, className, onPageChanged, page }: RootProps) => {
           </Fragment>
         ))}
       </div>
-      <div className={className}>{stepContent}</div>
+      <div className={className} data-page={page}>
+        {stepContent}
+      </div>
     </>
   )
 }

@@ -1,3 +1,7 @@
+.paper {
+  margin-bottom: 10px;
+}
+
 .field {
   display: flex;
   align-items: center;

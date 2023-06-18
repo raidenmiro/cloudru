@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
 
 import { toTitle } from '@/shared/lib/string'
@@ -18,7 +19,7 @@ export interface ElementsProps {
 }
 
 export function ElementsGroup({ renderVariant }: ElementsProps) {
-  const { register } = useFormContext()
+  const { formState, register } = useFormContext()
   const Component = COMPONENTS[renderVariant]
   const title = `${toTitle(renderVariant)} group`
 
@@ -33,6 +34,7 @@ export function ElementsGroup({ renderVariant }: ElementsProps) {
           value={String(index + 1)}
         />
       ))}
+      <ErrorMessage errors={formState.errors} name={renderVariant} />
     </div>
   )
 }

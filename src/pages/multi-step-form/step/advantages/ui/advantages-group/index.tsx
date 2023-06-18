@@ -22,7 +22,7 @@ export function AdvantagesFields() {
 
   return (
     <Fragment>
-      <ul>
+      <ul className={s.paper}>
         {fields.map((field, index) => (
           <li key={field.id} className={s.field}>
             <Input

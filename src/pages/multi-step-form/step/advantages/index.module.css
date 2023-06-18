@@ -1,12 +1,16 @@
 .form {
   width: 100%;
-  height: 433px;
+  height: 450px;
   overflow-y: auto;
 }
 
 .fieldset {
   max-width: 336px;
   border: none;
+}
+
+.advantages {
+  margin-bottom: 24px;
 }
 
 .elements {

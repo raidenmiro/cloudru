@@ -42,5 +42,9 @@ body {
 
 .content {
   padding-top: 78px;
+
+  &[data-page='2'] {
+    padding-top: 27px;
+  }
 }
 
