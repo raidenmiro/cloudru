@@ -17,6 +17,10 @@
   border: 1px solid var(--surface-border);
   border-radius: 4px;
   outline-color: var(--accent);
+
+  &[aria-invalid='true'] {
+    outline-color: var(--failure);
+  }
 }
 
 .footer {

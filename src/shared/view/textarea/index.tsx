@@ -13,13 +13,22 @@ type BaseProps = ComponentPropsWithoutRef<'textarea'>
 
 export interface TextareaProps extends BaseProps {
   label: string
+  maxCountLetter?: number
   maxHeight?: number | string
   submitOnEnter?: boolean
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
-    { className, label, maxHeight = '500px', onChange, value, ...props },
+    {
+      className,
+      label,
+      maxCountLetter = 200,
+      maxHeight = '500px',
+      onChange,
+      value,
+      ...props
+    },
     forwardedRef
   ) => {
     const [input, setInput] = useState((value ?? '') as string)
@@ -28,6 +37,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const a11yId = useId()
     const count = amountOfChars(input)
+    const overTheLimit = count > maxCountLetter
 
     useEffect(() => {
       const textarea = ref.current
@@ -47,6 +57,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className={s.paper}>
         <label htmlFor={a11yId}>{label}</label>
         <textarea
+          aria-invalid={overTheLimit}
+          readOnly={overTheLimit}
           ref={mergeRefs(forwardedRef, ref)}
           {...props}
           className={cc([s.textarea, className])}
