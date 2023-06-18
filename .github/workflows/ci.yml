@@ -37,6 +37,9 @@ jobs:
     name: Deploy 🚀
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://cloudru-test-task.web.app/
     needs:
       - checks
     steps:
