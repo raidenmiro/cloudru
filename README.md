@@ -1,7 +1,7 @@
 # Тестовое задание для поступления в FrontCloudCamp ⚡️
 
-<div style="margin-bottom: 25px;">
-  <img src="./public/logo.svg" width="560px" align="center" alt="Cloud.ru logo" style="max-width: 100%;" />
+<div>
+  <img src="./logo.svg" width="560px" align="center" alt="Cloud.ru logo" style="max-width: 100%;" />
 </div>
 <br/>
 
@@ -9,7 +9,7 @@
 
 ## Оглавление
 
-* [Требования](https://github.com/FrontCloudCamp/test-assignment)
+* [Подробные требования](https://github.com/FrontCloudCamp/test-assignment)
 * [Технологии](#технологии)
 * [Запуск локально](#запуск)
 * [Запуск тестов](#тестирование)
