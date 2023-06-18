@@ -22,3 +22,4 @@ export const Button = ({
     </button>
   )
 }
+Button.displayName = 'View.Button'

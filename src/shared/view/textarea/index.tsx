@@ -74,3 +74,4 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   }
 )
+TextArea.displayName = 'View.TextArea'

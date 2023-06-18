@@ -54,3 +54,4 @@ export const Avatar = ({ alt, fallback, src = '' }: AvatarProps) => {
     </span>
   )
 }
+Avatar.displayName = 'View.Avatar'
