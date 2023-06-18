@@ -1,6 +1,6 @@
 .paper {
   display: flex;
-  gap: 3px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -20,7 +20,7 @@
 .label::before {
   display: inline-block;
   width: 16px;
-  height: 16px;
+  height: 17px;
   content: '';
   border: 1px solid var(--surface-border);
   border-radius: 4px;
