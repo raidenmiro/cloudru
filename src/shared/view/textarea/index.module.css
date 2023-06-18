@@ -9,7 +9,7 @@
 }
 
 .textarea {
-  width: 680px;
+  max-width: 680px;
   min-height: 84px;
   padding: 5px;
   resize: none;
@@ -25,6 +25,7 @@
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 

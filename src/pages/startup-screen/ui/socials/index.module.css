@@ -4,6 +4,10 @@
   gap: 18px;
   align-items: center;
   
+  @media (width <= 535px) {
+    gap: 8px;
+  }
+
   & svg {
     width: 16px;
     height: 16px;

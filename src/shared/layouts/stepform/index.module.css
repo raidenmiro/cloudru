@@ -1,15 +1,14 @@
 body {
   display: flex;
-  align-items: center;
   justify-content: center;
+
+  @media (width <= 780px) {
+    display: block;
+  }
 
   &:has(.container[data-step='3']) {
     align-items: flex-start;
     padding-top: 24px;
-  }
-
-  @media (width <= 992px) {
-    padding-inline: 25px;
   }
 }
 
@@ -30,7 +29,14 @@ body {
   }
 
   @media (width <= 992px) {
-    width: 800px;
+    max-width: 700px;
+    padding: 42px 92px;
+  }
+
+  @media (width <= 730px) {
+    width: 100%;
+    max-width: unset;
+    padding: 32px 52px;
   }
 }
 

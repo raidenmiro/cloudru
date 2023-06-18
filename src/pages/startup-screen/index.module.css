@@ -1,12 +1,9 @@
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 24px;
+}
 
-  @media (width <= 576px) {
-    display: block;
-    padding-inline: 25px;
-  }
+div#root {
+  max-width: 100%;
 }
 
 .card {
@@ -21,6 +18,10 @@ body {
     height: 504px;
     padding-inline: 45px;
   }
+
+  @media (width <= 535px) {
+    padding-inline: 25px;
+  }
 }
 
 .header {
@@ -30,6 +31,10 @@ body {
   padding-bottom: 26px;
   margin-bottom: 25px;
   border-bottom: 1px solid var(--surface-divider);
+
+  @media (width <= 535px) {
+    gap: 14px;
+  }
 }
 
 .details {

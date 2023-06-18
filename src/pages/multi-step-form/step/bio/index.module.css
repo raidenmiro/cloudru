@@ -16,4 +16,12 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: 112px;
+
+  @media (width <= 992px) {
+    padding-inline: 92px;;
+  }
+
+  @media (width <= 730px) {
+    padding-inline: 52px;
+  }
 }
