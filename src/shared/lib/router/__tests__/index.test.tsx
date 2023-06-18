@@ -26,34 +26,36 @@ const EntryPoint = () => {
   }
 }
 
-test('should be render home page', () => {
-  const { getByText } = render(<EntryPoint />)
+describe('router', () => {
+  test('should be render home page', () => {
+    const { getByText } = render(<EntryPoint />)
 
-  const page = getByText('home page')
-  expect(page).toBeDefined()
-})
-
-test('should be render about page', () => {
-  const { getByText } = render(<EntryPoint />)
-
-  act(() => {
-    router.go('/about')
+    const page = getByText('home page')
+    expect(page).toBeDefined()
   })
 
-  const page = getByText('about page')
-  expect(page).toBeDefined()
-})
+  test('should be render about page', () => {
+    const { getByText } = render(<EntryPoint />)
 
-test('should be navigate to products page', () => {
-  const { getByText } = render(<EntryPoint />)
+    act(() => {
+      router.go('/about')
+    })
 
-  act(() => {
-    router.go('/about')
+    const page = getByText('about page')
+    expect(page).toBeDefined()
   })
 
-  const button = getByText('about page')
-  fireEvent.click(button)
+  test('should be navigate to products page', () => {
+    const { getByText } = render(<EntryPoint />)
 
-  const page = getByText('products page')
-  expect(page).toBeDefined()
+    act(() => {
+      router.go('/about')
+    })
+
+    const button = getByText('about page')
+    fireEvent.click(button)
+
+    const page = getByText('products page')
+    expect(page).toBeDefined()
+  })
 })
