@@ -36,7 +36,7 @@ export function AdvantagesFields() {
               type="button"
               className={s.control}
               onClick={() => remove(index)}>
-              <Icon path="sprite/trash" />
+              <Icon className={s.icon} path="sprite/trash" />
             </button>
           </li>
         ))}
