@@ -2,12 +2,16 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { forwardRef, useState } from 'react'
 
 import { FormattedInput } from '@/shared/lib/formatinput'
+import { formatTel } from '@/shared/lib/string'
 
 type InputProps = ComponentPropsWithoutRef<'input'>
 
 export const PhoneInput = forwardRef<HTMLInputElement, InputProps>(
-  (props, ref) => {
-    const [value, setValue] = useState('')
+  ({ value, ...props }, ref) => {
+    const [input, setInput] = useState(() => {
+      if (value) return formatTel(value as string)
+      return ''
+    })
 
     return (
       <FormattedInput
@@ -15,10 +19,9 @@ export const PhoneInput = forwardRef<HTMLInputElement, InputProps>(
         {...props}
         label="Номер телефона"
         mask="+# (###) ### ## ##"
-        name="phone"
-        onChangeValue={setValue}
+        onChangeValue={setInput}
         placeholder="+7 (999) 999 99 99"
-        value={value}
+        value={input}
       />
     )
   }

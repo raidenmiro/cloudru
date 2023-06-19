@@ -12,15 +12,11 @@ import { Input } from '@/shared/view/input'
 import { mergeRefs } from '../merge-refs'
 import s from './index.module.css'
 
-type BaseProps = Omit<
-  ComponentPropsWithoutRef<'input'>,
-  'value' | 'name' | 'size'
->
+type BaseProps = Omit<ComponentPropsWithoutRef<'input'>, 'value' | 'size'>
 
 export interface FormattedInputProps extends BaseProps {
   label: string
   mask: string
-  name: string
   onChangeValue(v: string): void
   placeholder: string
   value: string

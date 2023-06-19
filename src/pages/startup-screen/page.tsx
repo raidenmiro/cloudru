@@ -1,10 +1,11 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { sendForm } from '@/shared/api'
 import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
+import { formatTel } from '@/shared/lib/string'
 import { Avatar } from '@/shared/view/avatar'
 import { Button } from '@/shared/view/button'
 import { Input } from '@/shared/view/input'
@@ -17,16 +18,15 @@ import { Socials } from './ui/socials'
 
 export const StartupScreen = () => {
   const [loading, setLoading] = useState(false)
-  const { formState, handleSubmit, register, setValue, watch } = useForm({
-    resolver: yupResolver(startedForm)
-  })
+  const { control, formState, handleSubmit, register, setValue, watch } =
+    useForm({ resolver: yupResolver(startedForm) })
 
   usePersistForm('started', { setValue, watch }) // sync with localStorage
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       setLoading(true)
-      await sendForm(data)
+      await sendForm({ ...data, phone: formatTel(data.phone) })
       router.go(paths.stepFormsScreen())
     } finally {
       setLoading(false)
@@ -44,9 +44,18 @@ export const StartupScreen = () => {
       </header>
       <main className={s.main}>
         <form className={s.form} onSubmit={onSubmit}>
-          <PhoneInput
-            aria-invalid={Boolean(formState.errors.phone)}
-            {...register('phone')}
+          <Controller
+            control={control}
+            name="phone"
+            render={({ field }) => (
+              <PhoneInput
+                aria-invalid={Boolean(formState.errors.phone)}
+                name={field.name}
+                onChange={field.onChange}
+                ref={field.ref}
+                value={field.value}
+              />
+            )}
           />
           <ErrorMessage errors={formState.errors} name="phone" />
           <Input
