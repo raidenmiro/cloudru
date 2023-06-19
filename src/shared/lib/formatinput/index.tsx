@@ -95,6 +95,14 @@ const getMaskPosition = (
   return pos
 }
 
+function toggleA11y(node: HTMLElement, valid: boolean) {
+  if (!valid) {
+    node.setAttribute('aria-invalid', 'true')
+  } else {
+    node.removeAttribute('aria-invalid')
+  }
+}
+
 export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
   (
     {
@@ -155,6 +163,12 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
         const value = target.value.slice(0, mask.length)
         const savePos = target.selectionStart || getStartPosition(mask)
 
+        if (!validate(value)) {
+          toggleA11y(target, false)
+          return
+        }
+
+        toggleA11y(target, true)
         const parsedValue = defaultParser(value)
         onChangeValue(parsedValue)
 
@@ -162,7 +176,7 @@ export const FormattedInput = forwardRef<HTMLInputElement, FormattedInputProps>(
           setCaret(target, savePos)
         }
       },
-      [mask, onChangeValue]
+      [mask, onChangeValue, validate]
     )
 
     const handleKeyDown = useCallback(
