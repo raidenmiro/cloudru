@@ -1,7 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { sendForm } from '@/shared/api'
 import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
@@ -18,8 +18,9 @@ import { Socials } from './ui/socials'
 
 export const StartupScreen = () => {
   const [loading, setLoading] = useState(false)
-  const { control, formState, handleSubmit, register, setValue, watch } =
-    useForm({ resolver: yupResolver(startedForm) })
+  const { formState, handleSubmit, register, setValue, watch } = useForm({
+    resolver: yupResolver(startedForm)
+  })
 
   usePersistForm('started', { setValue, watch }) // sync with localStorage
 
@@ -44,20 +45,12 @@ export const StartupScreen = () => {
       </header>
       <main className={s.main}>
         <form className={s.form} onSubmit={onSubmit}>
-          <Controller
-            control={control}
-            name="phone"
-            render={({ field }) => (
-              <PhoneInput
-                aria-invalid={Boolean(formState.errors.phone)}
-                name={field.name}
-                onChange={field.onChange}
-                ref={field.ref}
-                value={field.value}
-              />
-            )}
+          <PhoneInput
+            {...register('phone')}
+            aria-invalid={Boolean(formState.errors.phone)}
           />
           <ErrorMessage errors={formState.errors} name="phone" />
+
           <Input
             aria-invalid={Boolean(formState.errors.email)}
             placeholder="tim.jennings@example.com"
@@ -66,6 +59,7 @@ export const StartupScreen = () => {
             type="email"
           />
           <ErrorMessage errors={formState.errors} name="email" />
+
           <Button
             disabled={loading}
             kind="filled"
