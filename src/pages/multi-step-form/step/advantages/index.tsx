@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { sendForm } from '@/shared/api'
 import { useLayoutProps } from '@/shared/layouts/stepform/context'
+import { usePersistForm } from '@/shared/lib/hooks/use-persist-form'
 import { Button } from '@/shared/view/button'
 
 import s from './index.module.css'
@@ -26,6 +27,8 @@ export const Advantages = () => {
     defaultValues: genStaticFields(),
     resolver: yupResolver(advantagesSchema)
   })
+
+  usePersistForm('advantages', methods)
 
   const onSubmit = methods.handleSubmit(async (data) => {
     try {
