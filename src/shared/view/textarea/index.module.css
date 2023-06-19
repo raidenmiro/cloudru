@@ -31,12 +31,7 @@
 }
 
 .failure {
-  z-index: -2;
   font-size: 12px;
   color: var(--failure-faded);
   user-select: none;
-
-  &.is_show {
-    z-index: 1;
-  }
 }

@@ -45,7 +45,7 @@ export const Bio = () => {
           placeholder="placeholder"
           variant="secondary"
         />
-        <ErrorMessage errors={formState.errors} name="nickname" />
+        <ErrorMessage as="p" errors={formState.errors} name="nickname" />
       </FieldControl>
 
       <FieldControl>
@@ -57,7 +57,7 @@ export const Bio = () => {
           placeholder="placeholder"
           variant="secondary"
         />
-        <ErrorMessage errors={formState.errors} name="name" />
+        <ErrorMessage as="p" errors={formState.errors} name="name" />
       </FieldControl>
 
       <FieldControl>
@@ -69,7 +69,7 @@ export const Bio = () => {
           placeholder="placeholder"
           variant="secondary"
         />
-        <ErrorMessage errors={formState.errors} name="surname" />
+        <ErrorMessage as="p" errors={formState.errors} name="surname" />
       </FieldControl>
 
       <FieldControl>
@@ -78,7 +78,7 @@ export const Bio = () => {
           name="sex"
           render={({ field }) => <ChoiceGender {...field} />}
         />
-        <ErrorMessage errors={formState.errors} name="sex" />
+        <ErrorMessage as="p" errors={formState.errors} name="sex" />
       </FieldControl>
 
       <footer className={s.footer}>

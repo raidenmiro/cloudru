@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -23,7 +24,7 @@ export const AboutMe = () => {
   const [loading, setLoading] = useState(false)
   const [answer, setAnswer] = useState<FormAnswer>(NOOP)
 
-  const { handleSubmit, register, setValue, watch } = useForm({
+  const { formState, handleSubmit, register, setValue, watch } = useForm({
     resolver: yupResolver(aboutMeSchema)
   })
 
@@ -45,7 +46,12 @@ export const AboutMe = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <TextArea {...register('aboutme')} label="About" maxHeight={120} />
+      <TextArea
+        {...register('aboutme')}
+        error={<ErrorMessage errors={formState.errors} name="aboutme" />}
+        label="About"
+        maxHeight={120}
+      />
       <footer className={s.footer}>
         <Button
           className={s.button}

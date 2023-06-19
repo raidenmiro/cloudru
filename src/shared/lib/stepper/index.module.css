@@ -22,10 +22,12 @@
   border-radius: 9999px;
 
   &.is_completed {
+    color: var(--accent);
     background: var(--accent);
   }
 
   &.is_active {
+    color: var(--accent);
     background: var(--accent);
 
     &::before {

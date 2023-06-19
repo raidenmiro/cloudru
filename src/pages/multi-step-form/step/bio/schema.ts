@@ -6,8 +6,20 @@ enum Sex {
 }
 
 export const bioSchema = object({
-  name: string().min(2).max(50).required(),
-  nickname: string().min(2).max(30).required(),
+  name: string()
+    .min(2)
+    .max(50)
+    .required()
+    .matches(/[a-z]/i, 'Allow only letters'),
+  nickname: string()
+    .min(2)
+    .max(30)
+    .required()
+    .matches(/^[a-z0-9]/i, 'Allow only letters and numbers'),
   sex: mixed<Sex>().oneOf(Object.values(Sex)),
-  surname: string().min(2).max(50)
+  surname: string()
+    .min(2)
+    .max(50)
+    .required()
+    .matches(/[a-z]/i, 'Allow only letters')
 })

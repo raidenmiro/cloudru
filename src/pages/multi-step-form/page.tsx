@@ -8,13 +8,13 @@ import { Bio } from './step/bio'
 export const StepFormScreen = () => {
   return (
     <StepForm>
-      <Stepper.Step description="Biography">
+      <Stepper.Step description="Biography" label="1">
         <Bio />
       </Stepper.Step>
-      <Stepper.Step description="Advantages">
+      <Stepper.Step description="Advantages" label="2">
         <Advantages />
       </Stepper.Step>
-      <Stepper.Step description="About me">
+      <Stepper.Step description="About me" label="3">
         <AboutMe />
       </Stepper.Step>
     </StepForm>

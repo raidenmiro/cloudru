@@ -73,6 +73,7 @@ Indicator.displayName = 'Stepper.Indicator'
 interface StepProps {
   children: ReactNode
   description: string
+  label?: string
 }
 
 const Step = ({ children, description }: StepProps) => (

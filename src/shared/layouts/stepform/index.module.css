@@ -47,5 +47,9 @@ body {
   &[data-page='2'] {
     padding-top: 27px;
   }
+
+  &[data-page='3'] {
+    padding-top: 66px;
+  }
 }
 

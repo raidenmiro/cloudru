@@ -44,7 +44,7 @@ export const FinallyModal = ({ onHide, open, type }: FinallyModalProps) => {
       title="Completed">
       <header className={cc([s.header, type === 'success' && s.is_success])}>
         <h2>{title}</h2>
-        <button className={s.close} data-type={type}>
+        <button className={s.close} data-type={type} onClick={onHide}>
           <Icon path="sprite/close" />
         </button>
       </header>

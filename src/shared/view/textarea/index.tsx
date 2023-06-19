@@ -1,5 +1,5 @@
 import cc from 'classcat'
-import type { ChangeEvent, ComponentPropsWithoutRef } from 'react'
+import type { ChangeEvent, ComponentPropsWithoutRef, ReactNode } from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 
 import { usePrevious } from '@/shared/lib/hooks/use-previos'
@@ -12,6 +12,7 @@ import { adjustHeight } from './lib'
 type BaseProps = ComponentPropsWithoutRef<'textarea'>
 
 export interface TextareaProps extends BaseProps {
+  error?: ReactNode
   label: string
   maxCountLetter?: number
   maxHeight?: number | string
@@ -22,6 +23,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
+      error,
       label,
       maxCountLetter = 200,
       maxHeight = '500px',
@@ -66,9 +68,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           value={value}
         />
         <div className={s.footer}>
-          <span className={cc([s.failure, count >= 200 && s.is_show])}>
-            Max limit chars
-          </span>
+          {error && <span className={s.failure}>{error}</span>}
           <span>{count}</span>
         </div>
       </div>

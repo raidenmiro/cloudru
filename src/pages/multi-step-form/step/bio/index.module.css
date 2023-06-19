@@ -3,6 +3,7 @@
   gap: 33px;
   width: 100%;
   max-width: 300px;
+  overflow-y: auto;
 }
 
 .input {
