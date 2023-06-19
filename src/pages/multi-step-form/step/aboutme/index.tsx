@@ -50,10 +50,18 @@ export const AboutMe = () => {
         maxLength={200}
       />
       <footer className={s.footer}>
-        <Button kind="outline" onClick={() => prevPage()} type="button">
+        <Button
+          className={s.button}
+          kind="outline"
+          onClick={() => prevPage()}
+          type="button">
           Назад
         </Button>
-        <Button disabled={loading} loading={loading} type="submit">
+        <Button
+          className={s.button}
+          disabled={loading}
+          loading={loading}
+          type="submit">
           Отправить
         </Button>
       </footer>
