@@ -1,6 +1,7 @@
 .field {
   display: grid;
   gap: 9px;
+  width: 100%;
 }
 
 .input {
