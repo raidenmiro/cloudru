@@ -58,7 +58,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <label htmlFor={a11yId}>{label}</label>
         <textarea
           aria-invalid={overTheLimit}
-          readOnly={overTheLimit}
           ref={mergeRefs(forwardedRef, ref)}
           {...props}
           className={cc([s.textarea, className])}
@@ -67,7 +66,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           value={value}
         />
         <div className={s.footer}>
-          <span>Tip</span>
+          <span className={cc([s.failure, count >= 200 && s.is_show])}>
+            Max limit chars
+          </span>
           <span>{count}</span>
         </div>
       </div>

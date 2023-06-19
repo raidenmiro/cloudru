@@ -19,7 +19,7 @@
   outline-color: var(--accent);
 
   &[aria-invalid='true'] {
-    outline-color: var(--failure);
+    outline-color: var(--failure-faded);
   }
 }
 
@@ -28,9 +28,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+}
 
-  & span {
-    font-size: 12px;
-    color: var(--text-note);
+.failure {
+  z-index: -2;
+  font-size: 12px;
+  color: var(--failure-faded);
+
+  &.is_show {
+    z-index: 1;
   }
 }

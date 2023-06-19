@@ -43,12 +43,7 @@ export const AboutMe = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <TextArea
-        {...register('aboutme')}
-        label="About"
-        maxHeight={120}
-        maxLength={200}
-      />
+      <TextArea {...register('aboutme')} label="About" maxHeight={120} />
       <footer className={s.footer}>
         <Button
           className={s.button}
