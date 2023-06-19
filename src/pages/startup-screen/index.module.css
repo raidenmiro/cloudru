@@ -1,15 +1,13 @@
-body {
-  padding: 24px;
-}
-
-div#root {
+:global(#root) {
   max-width: 100%;
+  padding-inline: 23px;
 }
 
 .card {
   width: 900px;
   height: 704px;
   padding: 26px 25px;
+  margin-top: 24px;
   background: var(--bg-secondary);
   border-radius: 12px;
 
