@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -6,18 +7,31 @@ import { useLayoutProps } from '@/shared/layouts/stepform/context'
 import { Button } from '@/shared/view/button'
 
 import s from './index.module.css'
+import { preparePayload } from './lib'
+import { advantagesSchema } from './schema'
 import { AdvantagesFields, genStaticFields } from './ui/advantages-group'
 import { ElementsGroup } from './ui/elements-group'
+
+export interface Fields {
+  advantages: Array<{ field: string }>
+  checkbox: string[]
+  radio: string
+}
 
 export const Advantages = () => {
   const { nextPage, prevPage } = useLayoutProps()
   const [loading, setLoading] = useState(false)
-  const methods = useForm({ defaultValues: genStaticFields() })
+
+  const methods = useForm<Fields>({
+    defaultValues: genStaticFields(),
+    resolver: yupResolver(advantagesSchema)
+  })
 
   const onSubmit = methods.handleSubmit(async (data) => {
     try {
       setLoading(true)
-      await sendForm(data)
+      const payload = preparePayload(data)
+      await sendForm(payload)
       nextPage()
     } finally {
       setLoading(false)

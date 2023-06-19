@@ -1,7 +1,9 @@
-import { array, mixed, object, string } from 'yup'
+import { array, object, string } from 'yup'
 
 export const advantagesSchema = object({
-  advantages: array().of(mixed()).required(),
+  advantages: array()
+    .of(object({ field: string() }))
+    .required(),
   checkbox: array().of(string()).required(),
   radio: string().required()
 })
