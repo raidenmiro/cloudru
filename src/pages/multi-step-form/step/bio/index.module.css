@@ -26,4 +26,19 @@
   @media (width <= 730px) {
     padding-inline: 52px;
   }
+
+  @media (width <= 455px) {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.button {
+  @media (width <= 455px) {
+    width: 100%;
+
+    &:first-child {
+      order: 1;
+    }
+  }
 }

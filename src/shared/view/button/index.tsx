@@ -1,3 +1,4 @@
+import cc from 'classcat'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import s from './index.module.css'
@@ -11,12 +12,13 @@ export interface ButtonProps extends BaseProps {
 
 export const Button = ({
   children,
+  className,
   kind = 'filled',
   loading = false,
   ...props
 }: ButtonProps) => {
   return (
-    <button data-kind={kind} {...props} className={s.button}>
+    <button data-kind={kind} {...props} className={cc([s.button, className])}>
       {loading && <span aria-hidden className={s.spinner} />}
       {loading ? 'Отправка..' : children}
     </button>
