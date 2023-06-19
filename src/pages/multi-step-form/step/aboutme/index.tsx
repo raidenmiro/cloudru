@@ -35,9 +35,11 @@ export const AboutMe = () => {
     try {
       const answer = await sendForm(data)
       setAnswer(answer)
-      setTruthy()
+    } catch (error) {
+      setAnswer(NOOP)
     } finally {
       setLoading(false)
+      setTruthy()
     }
   })
 

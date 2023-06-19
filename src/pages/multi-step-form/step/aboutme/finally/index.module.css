@@ -68,7 +68,7 @@
   border-radius: 9999px;
   transform: translateY(-50%);
 
-  [data-type='fail']& {
+  [data-type='error']& {
     background: var(--failure);
   }
 }
